@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php $this->headMeta()->setName('description',$this->course->meta_description);?>
+<?php $this->headMeta()->setName('keywords',$this->course->meta_keywords);?>
+<?php $this->headTitle($this->course->meta_title); ?>
+
+<?php $this->headMeta()->setProperty("og:title", $this->course->meta_title);?>
+<?php $this->headMeta()->setProperty("og:url", Zend_Registry::getInstance()->configuration->app->url."/".$hyphen_url."/".$this->course->course_id."/");?>
+<?php $this->headMeta()->setProperty("og:image", Zend_Registry::getInstance()->configuration->app->url."/images/layout/comlogo_fb.png");?>
+<?php $this->headMeta()->setProperty("og:description", $this->course->meta_description);?>
+
+<?php echo $this->headMeta();?>
+<?php echo $this->headTitle(); ?>
+<link rel="icon" href="http://www.dezyre.com/favicon.ico" type="image/x-icon"/> 
+<link rel="shortcut icon" href="http://www.dezyre.com/favicon.ico" type="image/x-icon"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<link rel="publisher" href="https://plus.google.com/112833548823362671038"/>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/css/ostyle.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/jquery.bxslider.css" type="text/css" />
+<link href="/css/flat-ui.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+<!--Main bs-main-wrapper Start here-->
+<div class="bs-main-wrapper"> 
+  <!-- bs-header start-->
+  <header>
+    <div class="bs-header-upper">
+      <div class="container">
+        <div class="row">
+          <div class="bs-signup-area">
+          <!-- 
+            <div class="bs-signup"><img src="/images/course_new/signup.png" alt="Signup"><a href="#">Signup</a></div>
+           -->
+            <div class="bs-login"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/Login.png" alt="Signup"><a href="/user/login">Login</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-header-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="bs-logo-area">
+            <div class="logo"><a href="/"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/layout/dezyre.png" alt="logo"></a></div>
+            <nav class="navi">
+             <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i><span>MENU</span> </button> -->
+              <div class="nav">
+              	<ul class="nav navbar-nav">
+                  <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                  <li class="page-scroll brows"><br/><h4 class="dlab_font_big">Call Us 1-866-313-2409 (US Toll Free)</h4></li>
+                  <!-- 
+                  <li class="page-scroll brows"><a href="#">Blog</a></li>
+                  <li class="page-scroll brows"><a href="#student">Reviews</a></li>
+                  <li class="page-scroll brows"><a href="#">About Us</a></li>
+                  <li class="page-scroll brows"><a href="#contact">Contact Us</a></li>
+				   -->
+				  
+              	  <li><a class="scroll tabview" href="#overview">Overview</a></li>
+                  <li><a class="scroll tabview" href="#course">Course</a></li>
+                  <li><a class="scroll tabview" href="#discuss">Forum</a></li>
+                  <li><a class="scroll tabview" href="#student">Reviews</a></li>
+                  <li><a class="scroll tabview" href="#faq">FAQ</a></li>
+                  <li><a class="scroll tabview" href="#batch">Batch</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Banner Start here-->
+    <div class="bs-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 video-upper">
+            <div class="certificate">
+              <h1><?php echo $this->course->title;?></span></h1>
+              <p>Live Instructor Led Online class</p>
+            </div>
+            <div class="video-section"> 
+            	<?php echo $this->course->sample_video;?>				
+            </div>
+            <div class="batch-btn-area">
+              <div class="demo-col batch-btn"> <a class="btn btn-large btn-block btn-primary scroll" href="#batch">BATCH TIMING</a> </div>
+            </div>
+          </div>
+          <div class="col-sm-4 form-box">
+            
+              <div class="form-header">
+                <h1 style="text-align:center">Speak to an Advisor</h1>
+                <div id="thankyou_submit" style="padding:8px;text-align:center"></div>
+                <div id="request_callback_div" class="form-group">
+                  
+                  <div id='response-error' style='margin-left:5px;color:red'></div>
+                  	
+                  <div class="form-control input-area name-input-wrapper">
+                    <input type="text" name="customer_name" id="callback_name" placeholder="Name">
+                    <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/user.png" alt="user" /> </div>
+                  <div class="form-control input-area phone-input-wrapper">
+                    <input type="text" name="customer_phone" id="callback_mobile" placeholder="Phone">
+                    <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/phone.png" alt="Phone" /> </div>
+                  <div class="form-control input-area message-input-wrapper">
+                    <input type="text" name="customer_message" id="callback_email" placeholder="Email">
+                    <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/message.png" alt="Email" /> </div>
+                  <div class="guarantee">
+                    <p>We guarantee 100% privacy. Your information will not be shared.</p>
+                  </div>
+                  
+                  <div class="demo-col click-btn">
+                  <input id="request-callback-submit" type="submit" class="btn btn-large btn-block btn-primary" name="contact" value="CLICK TO SPEAK TO AN ADVISOR" />                  
+						<a href="" class="orange_button" style="width:232px;font-size:18px;color:#fff" id="request-callback-submit">Click to Speak to an Advisor</a>
+				  </div>
+				  
+				  <input type="hidden" id="callback_course" name="callback_course" value="<?php echo $this->course->title;?>"/>
+				<input type="hidden" id="callback_referer" name="callback_referer" value="<?php echo $this->referer;?>"/>
+				<input type="hidden" id="callback_country" name="callback_country" value="<?php echo $this->callback_country;?>"/>
+                
+                </div>
+                
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-overview-area">
+      <div class="container">
+      	<div class="col-sm-2 box-right first-box">
+          <div class="icon-text"> <a href="#join" class="join"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/discuss.png" alt="discuss">
+            <h1>Why Join Us</h1>
+            </a> </div>
+        </div>
+        <div class="col-sm-2 box-right">
+          <div class="icon-text"> <a href="#batch" class="batch"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/batch.png" alt="batch">
+            <h1>Batch Timing</h1>
+            </a> </div>
+        </div>
+        <div class="col-sm-2 box-right">
+          <div class="first-box icon-text"> <a href="#overview" class="overview"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/overview.png" alt="overview">
+            <h1>Overview</h1>
+            </a> </div>
+        </div>
+        <div class="col-sm-2 box-right">
+          <div class="icon-text"> <a href="#course" class="course"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/course.png" alt="course">
+            <h1>Course Content</h1>
+            </a> </div>
+        </div>
+        <!-- 
+        <div class="col-sm-2 box-right">
+          <div class="icon-text"> <a href="#discuss" class="discuss"> <img src="/images/course_new/discuss.png" alt="discuss">
+            <h1>Discussion Forum</h1>
+            </a> </div>
+        </div>
+         -->
+        <div class="col-sm-2 box-right">
+          <div class="icon-text"> <a href="#student" class="student"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/student.png" alt="student">
+            <h1>Student Reviews</h1>
+            </a> </div>
+        </div>
+        <div class="col-sm-2 box-right-noborder">
+          <div class="icon-text"> <a href="#faq" class="faq"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/FAQ.png" alt="overview">
+            <h1>FAQ</h1>
+            </a> </div>
+        </div>
+        
+      </div>
+    </div>
+    <!--Banner End here--> 
+    <!--Container Start here-->
+    <div class="bs-join-us">
+      <div class="container">
+        <div class="row">
+          <div class="join-us-header dlab_font"><a name="join" class="parallX"></a>
+            <h1> Why Join Us?</h1>
+          </div>
+          <?php 
+          $image_name = str_replace(" ","_",strtolower($this->course->title));
+          $image_name = str_replace("-","",$image_name);
+          $image_name = 'why_join_dezyre_'.str_replace(",","",$image_name).'.png';
+          	
+          ?>
+          <div class="bs-diagram"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/<?php echo $image_name;?>" alt="Why Join DeZyre's <?php echo $this->course->title;?>"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-block-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-6.png" alt="icon-06"></div>
+            	<div class="icon-header">            	
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			<?php echo $this->course->online_class_hours;?> HR LIVE WEBINAR
+              		</span>
+             	</div>
+            </div>
+            <div class="icon-details">
+              	<p><?php echo $this->course->online_class_desc;?></p>
+            </div>
+          </div>
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-5.png" alt="icon-05"></div>
+            	<div class="icon-header">
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			<?php echo $this->course->lab_hours;?> HOUR LAB
+              		</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">
+            	<p><?php echo $this->course->lab_desc;?></p>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-sm-6 block-icon block-icon2">
+            <div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-1.png" alt="icon-01"></div>
+            	<div class="icon-header">
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			<?php echo $this->course->project_hours;?> HOUR PROJECT
+              		</span>              		
+                </div>
+           	</div>
+           	<div class="icon-details">
+           		<p><?php echo $this->course->project_desc;?></p>
+           	</div>
+          </div>
+          <div class="col-sm-6 block-icon block-icon2">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-2.png" alt="icon-02"></div>
+            	<div class="icon-header">              
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			24x7 SUPPORT
+              		</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">           		
+           		<p>An online course could get lonely! So we provide you round the clock support. Ping us anytime with a question and expect to get a response quickly. Or just ping us if you feel lonely! You have lifetime access to our support even after finishing your course.</p>
+           	</div>
+          </div>
+          </div>
+          
+          <div class="row">
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-5.png" alt="icon-05"></div>
+            	<div class="icon-header">
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			LIFETIME ACCESS
+              		</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">           		
+           		<p>We understand that life could get in the way of your course! So once you enroll for a batch, you are welcome to participate in any future batches free - either because you missed a session or because you want to review the session again. </p>
+           	</div>
+          </div>
+          
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-6.png" alt="icon-06"></div>
+	            <div class="icon-header">
+    	        	<span style="display: inline-block;vertical-align: middle;line-height: 14px;">IN-DEPTH CURRICULUM</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">           		
+           		<p>Careful review by Industry Experts has been done to ensure that this is the most in-depth curriculum for this domain. This curriculum has been reviewed in detail by a panel of 12 Hadoop Developers with 10+ years of international development experience in companies such as Yahoo, Facebook, Hortonworks, IBM and Infosys.</p>
+           	</div>
+          </div>
+        </div>
+        
+          <div class="row">
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-3.png" alt="icon-03"></div>
+            	<div class="icon-header">
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			MONEY BACK GUARANTEE
+              		</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">           		
+           		<p>DeZyre has a 'No Questions asked' 100% money back guarantee. You can attend the first 2 webinars and if you are not satisfied for any reason, please let us know and we will refund your fees.</p>
+           	</div>
+           	
+          </div>
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:10px;">
+            	<div class="icon"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/icon-4.png" alt="icon-04"></div>
+            	<div class="icon-header">
+              		<span style="display: inline-block;vertical-align: middle;line-height: 14px;">
+              			CAREER MENTORSHIP
+              		</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">           		
+           		<p>Technical skills are of limited use if you can't present it rightly. Our faculty will advise you on how to write a winning resume, mock interviews and a career plan.</p>
+           	</div>
+          </div>
+          </div>
+          
+      </div>
+    </div>
+    <div class="bs-batches">
+      <div class="container">
+        <div class="row">
+          <div class="join-us-header dlab_font"> <a name="batch" class="parallX"></a>
+            <h1>Batches</h1>
+          </div>
+          <div class="bs-month-box">
+
+            <ul>
+              <li>
+              	<!-- 
+                <div class="col-sm-2-batch month-color-first">
+                  <div class="bs-month-header">
+                    <h3>April</h3>
+                  </div>
+                  <div class="date">
+                    <h2>29<sub>th</sub></h2>
+                  </div>
+                  <p class="bs-month-head"><i class="fa fa-sort-asc"></i></p>
+                  <div class="menu-item">
+                    <ul>
+                      <li>Duration</li>
+                      <li>Class Days</li>
+                      <li>Class Time</li>
+                      <li>Fees</li>
+                      <li style="border-bottom: 2px solid #dbdbdb" class="enrol-btn"><a href="#">Enroll</a></li>
+                      <li style="background-image:none"><b>1 Project Pack</b></li>
+                      <li style="text-align:left ">Work on 1 Business project</li>
+                      <li style="text-align:left ">Six 30 minute 1 on 1 calls with Faculty</li>
+                      <li>Fees</li>
+                      <li class="enrol-btn"><a href="#">Enroll</a></li>
+                    </ul>
+                  </div>
+                  <div class="bs-month-bottom">
+                    <p><i class="fa fa-sort-asc"></i></p>
+                  </div>
+                </div>
+                -->
+                <?php foreach($this->batches as $batch) { ?>
+                <div class="col-sm-2-batch month-color2" style="margin-bottom:30px">
+                  <div class="bs-blue-block">
+                    <h3><?php echo $batch->starting_month; ?></h3>
+                  </div>
+                  <div class="date1">
+                    <h2><?php echo $batch->starting_day ?></h2>
+                  </div>
+                  <p class="bs-month-head2"><i class="fa fa-sort-asc"></i></p>
+                  <div class="menu-item1">
+                    <ul>
+                      <li><span class="dlab_font_small">Duration</span>: <?php echo $batch->duration;?></li>
+                      <li><span class="dlab_font_small">Days</span>: <?php echo $batch->class_days; ?></li>
+                      <li><span class="dlab_font_small">Time</span>: <?php echo $batch->class_time; ?></li>
+                      <li>
+                      		<span class="dlab_font_small">Fees</span>:&nbsp;
+                      		<?php if(strcmp($this->country,'IN')==0) 
+                      				echo 'Rs.'.number_format($batch->fees);
+					  			  else 
+					  			  	echo '$'.number_format($batch->fees_dollar);
+							?>
+                      </li>
+                      <li style="border-bottom: 2px solid #dbdbdb" class="enrol-btn">
+                      	<?php if($batch->status=='open') { ?>
+							<a href="/course/enroll/course_id/<?php echo $this->course->course_id;?>/batch_id/<?php echo $batch->batch_id?>/project/N">Enroll</a>
+						<?php } else {?>
+							<b>Closed</b>
+						<?php }?>                      		
+                      </li>
+                      <li style="background-image:none;text-align:center"><span class="dlab_font"><span style="color:red">Plus</span> 1 Extra Project</span></li>
+                      <li style="text-align:left ">Work on an end to end Hadoop project with a Mentor</li>
+                      <li style="text-align:left ">Four 30 minute one-on-one skype calls with Mentor</li>
+                      <li>
+                      		<span class="dlab_font_small">Fees</span>:&nbsp;
+                      		<?php if(strcmp($this->country,'IN')==0) 
+                      				echo 'Rs.'.number_format($batch->fees_project);
+					  			  else 
+					  			  	echo '$'.number_format($batch->fees_project_dollar);
+							?>
+                      </li>                      
+                      <li class="enrol-btn-dark">
+                      	<?php if($batch->status=='open') { ?>
+							<a href="/course/enroll/course_id/<?php echo $this->course->course_id;?>/batch_id/<?php echo $batch->batch_id?>/project/Y">Enroll</a>
+						<?php } else {?>
+							<b>Closed</b>
+						<?php }?>                      		
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="bs-month-bottom2">
+                    <p><i class="fa fa-sort-asc"></i></p>
+                  </div>
+                </div>
+                
+                <?php }?>
+                <!-- 
+                <div class="col-sm-2-batch month-color4">
+                  <div class="bs-green-block">
+                    <h3>May</h3>
+                  </div>
+                  <div class="date3">
+                    <h2>14<sub>th</sub></h2>
+                  </div>
+                  <p class="bs-month-head4"><i class="fa fa-sort-asc"></i></p>
+                  <div class="menu-item3">
+                    <ul>
+                      <li>Duration</li>
+                      <li>Class Days</li>
+                      <li>Class Time</li>
+                      <li>Fees</li>
+                      <li style="border-bottom: 2px solid #dbdbdb" class="enrol-btn"><a href="#">Enroll</a></li>
+                      <li style="background-image:none"><b>1 Project Pack</b></li>
+                      <li style="text-align:left ">Work on 1 Business project</li>
+                      <li style="text-align:left ">Six 30 minute 1 on 1 calls with Faculty</li>
+                      <li>Fees</li>
+                      <li class="enrol-btn"><a href="#">Enroll</a></li>
+                    </ul>
+                  </div>
+                  <div class="bs-month-bottom4">
+                    <p><i class="fa fa-sort-asc"></i></p>
+                  </div>
+                </div>
+                <div class="col-sm-2-batch month-color4">
+                  <div class="bs-red-block">
+                    <h3>May</h3>
+                  </div>
+                  <div class="date4">
+                    <h2>29<sub>th</sub></h2>
+                  </div>
+                  <p class="bs-month-head5"><i class="fa fa-sort-asc"></i></p>
+                  <div class="menu-item4">
+                    <ul>
+                      <li>Duration</li>
+                      <li>Class Days</li>
+                      <li>Class Time</li>
+                      <li>Fees</li>
+                      <li style="border-bottom: 2px solid #dbdbdb" class="enrol-btn"><a href="#">Enroll</a></li>
+                      <li style="background-image:none"><b>1 Project Pack</b></li>
+                      <li style="text-align:left ">Work on 1 Business project</li>
+                      <li style="text-align:left ">Six 30 minute 1 on 1 calls with Faculty</li>
+                      <li>Fees</li>
+                      <li class="enrol-btn"><a href="#">Enroll</a></li>
+                    </ul>
+                  </div>
+                  <div class="bs-month-bottom5">
+                    <p><i class="fa fa-sort-asc"></i></p>
+                  </div>
+                </div>
+                 -->
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="bs-course-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="join-us-header dlab_font"> <a name="overview" class="parallX"></a>
+            <h1> Overview</h1>
+          </div>
+          
+          <div class="bs-modules">
+          			
+			<div class="col-sm-3 bs-setting">
+                <div class="questions-left">
+                	<ul class="unstyled">
+                		<?php 
+                		$count=1;
+                		foreach($this->faqs as $faq) { 
+							if($faq->type=='O') {
+							if($count==1) {
+						?>
+                			<li><a href class="overview_question selected" id="question_<?php echo $count;?>"><?php echo $faq->question;?></a></li>
+                		<?php } else {?>
+                			<li><a href class="overview_question" id="question_<?php echo $count;?>"><?php echo $faq->question;?></a></li>
+                		<?php }
+                			$count++;
+                			}
+						}?>                		
+                	</ul>
+                </div>  
+                               
+            </div>
+            
+            
+            
+            
+            <div class="col-sm-8 bs-module">               
+                <div class="bs-data">
+                	<?php 
+                	$count=1;
+                	foreach($this->faqs as $faq) {
+						if($faq->type=='O') {
+						if($count==1) {
+                	?>
+                		<div id="answer_question_<?php echo $count;?>" style="line-height:1.8;">
+                			<?php echo $faq->answer;?>
+                		</div>
+                	<?php } else { ?>
+                		<div id="answer_question_<?php echo $count;?>" style="display:none;line-height:1.8;text-align:justify">
+                			<?php echo $faq->answer;?>
+                		</div>
+                	<?php }
+						$count++;
+						}
+					}?>
+                	
+               	</div>           
+            </div>           
+          </div>          
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    <!--Container Start here-->
+    <div class="bs-join-us">
+      <div class="container">
+        <div class="row">
+          <div class="join-us-header dlab_font"><a name="course" class="parallX"></a>
+            <h1> Course Content?</h1>
+          </div>         
+        </div>
+      </div>
+    </div>
+    <div class="bs-block-section">
+      <div class="container">
+      <?php if($this->chapters != null) { 
+      		//foreach($this->chapters as $chapter) {
+			foreach (array_chunk($this->chapters, 2) as $row_chapter) {			
+      ?>
+         
+         <div class="row">
+      	<?php 
+      		foreach ($row_chapter as $chapter) {
+      			$topics = $this->topics[$chapter['topic_id']];
+      	?>
+          <div class="col-sm-6 block-icon">
+          	<div style="float:left;width:100%;margin-bottom:15px;">
+            	<div style="float:left;padding:15px"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/chapter.png" alt="icon-03"></div>
+            	<div class="icon-header">
+              		<span style="display: inline-block;vertical-align: middle;line-height: 20px;">
+              			<?php echo $chapter['topic_name'].' - '.htmlentities($topics[0]['topic_name']);?>
+              			
+              		</span>              		
+            	</div>
+            </div>
+            <div class="icon-details">
+            	<?php if($chapter['topic_description']!=null) { ?>
+            	<div style="padding-left: 15px"><p><?php echo $chapter['topic_description']?></p>
+            	</div>
+            	<br/>       		
+            	<?php }?>
+           		<?php echo $topics[0]['topic_description'];?>
+            </div>           	
+          </div>
+          <?php }?>
+          </div>
+            
+      <?php }      
+      }?>     
+      </div>
+    </div>
+    
+
+
+    
+    
+    <div class="bs-success">
+      <div class="container">
+        <div class="row">
+          <div class="join-us-header dlab_font"> <a name="student" class="parallX"></a>
+            <h1 id="review" style="color:#fff">Students Love Us</h1>
+          </div>
+          <br/><br/>
+          <ul class="student-review-slider">
+          <?php foreach($this->testimonials as $testimonial) { ?>	
+            <li>
+              <div class="col-sm-8 user-image-details" style="margin-bottom: 40px">
+                <p><?php echo $testimonial->testimonial; ?></p>
+                
+              </div>
+              
+              <div class="user-image">
+              		<div style="float:left;">              			
+              			<img style="height:100px;width:100px"  src='/user/view-image/user_id/<?php echo $testimonial->user_id;?>/n/2'/>
+              			
+              		</div>
+              		<div class="dlab_font" style="float:left;margin-left:20px;margin-top:40px;font-size:14px;font-weight:bold;color:#fff;">
+              			<span><?php echo $testimonial->first_name.' '.$testimonial->last_name;?> </span>
+              			<br/>
+              			<span style="font-size:12px;font-weight:normal;font-style:italic"><?php echo $testimonial->occupation;?></span>
+              		</div>
+              </div>
+              
+            </li>
+            
+           <?php }?>
+           
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bs-block-section">
+      <div class="container">
+        <div class="row">
+          <div class="faq-header dlab_font"> <a name="faq" class="parallX"></a>
+            <h1>FAQ's</h1>
+          </div>
+          <div class="faq-tab">
+            
+            <div>            
+              <?php echo $this->course->faq;?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-social-area">
+      <div class="container">
+        <div class="row">
+          <div class="social-icon">
+            <ul>
+              <li><a href="http://www.youtube.com/user/dezyreuniversity"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/youtube.png"></a></li>
+              <li><a href="http://twitter.com/dezyreonline"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/twitter.png"></a></li>
+              <li><a href="https://www.facebook.com/dezyreuniversity"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/facebook.png"></a></li>
+              <li><a href="//plus.google.com/112833548823362671038?prsrc=3" rel="publisher" target="_top" style="text-decoration:none;"><img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/gplus.png"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-footer-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 about-dezyre">
+            <h1>About Dezyre</h1>
+            <div class="footer-list">
+              <ul>
+                <li><a href="/index/aboutus">About Us</a></li>
+                <li><a href="/index/contactus">Contact Us</a></li>
+                <li><a href="/blog/index/">Blog</a></li>
+                <li><a href="/index/student-network">Student Network</a></li>
+                <li><a href="/index/faq">Frequently Asked Questions</a></li>
+                <li><a href="/index/privacy">Privacy Policy</a></li>
+                <li><a href="/index/disclaimer">Disclaimer</a></li>
+              </ul>              
+            </div>
+          </div>
+          <div class="col-sm-5 courses-dezyre">
+            <h1>Courses</h1>
+            <div class="footer-list">
+              <ul>
+                <li><a href="<?php echo Zend_Registry::getInstance()->configuration->app->url;?>Big-Data-and-Hadoop/19/">Big Data and Hadoop</a></li>
+                <li><a href="<?php echo Zend_Registry::getInstance()->configuration->app->url;?>Finance-and-Investment-Banking/21/">Diploma in Finance and Investment Banking</a></li>
+                <li><a href="<?php echo Zend_Registry::getInstance()->configuration->app->url;?>Certificate-in-Microsoft-Excel-for-Business-Professionals/12/">Certificate in Microsoft Excel for Business Professionals</a></li>
+                <li><a href="<?php echo Zend_Registry::getInstance()->configuration->app->url;?>Finance-for-Non-Finance-Professionals/18/">Finance for Non Finance Professionals</a></li>
+                <li><a href="<?php echo Zend_Registry::getInstance()->configuration->app->url;?>Communication-Skills/24">Business Communication Skills</a></li>
+                <li><a href="<?php echo Zend_Registry::getInstance()->configuration->app->url;?>Financial-Modeling/25/">Financial and Valuation Modeling</a></li>               
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4 contact-section">
+            <div class="contact-area">
+              <div class="phone-icon"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/phone-footer.png" alt="contact"></div>
+            </div>
+            <p>1866-313-2409 (US Toll Free)</p>
+          </div>
+          <div class="col-sm-4 contact-section">
+            <div class="contact-area">
+              <div class="phone-icon"> <img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course_new/msg.png" alt="message"></div>
+            </div>
+            <p>contact@dezyre.com </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bs-copyright-section">
+      <div class="container">
+        <div class="row">
+          <div class="bs-copyright">
+            <p>Copyright 2012-2014 DeZyre.com. All rights reserved. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Container End here--> 
+  </header>
+  <!-- bs-header End--> 
+</div>
+<!--Main bs-main-wrapper End here--> 
+
+<script src="/js/jquery.min.js"></script> 
+<script src="/js/jquery-1.10.2.js"></script> 
+<script src="/js/bootstrap.min.js"></script> 
+<script src="/js/site.js"></script> 
+<script src="/js/jquery.bxslider.js"></script>
+<script src="/js/view-batch.js"></script> 
+
+<script>
+		$(document).ready(function() {
+
+			
+			$('.overview_question').click(function(event) {
+				var element = $(this);
+			    var q = element.attr("id");
+			    $('.bs-data > [id^=answer]').not("#answer_"+q).hide();
+			    $('.overview_question').not("#"+q).removeClass('selected');
+			    $("#"+q).addClass('selected');
+			    
+			    $("#answer_"+q).fadeIn("slow");
+			    //$(this).toggleClass("active");
+			    return false;
+			});
+			
+
+			$('.student-review-slider').bxSlider({auto: true,controls:false,pager:true});
+			
+			
+		});	
+	
+		</script>
+		
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41699664-1', 'dezyre.com');
+  ga('send', 'pageview');
+
+</script>
+
+<!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+$.src='//v2.zopim.com/?dhdFs6MCD07fnrlHhjeO8kjolQy1Yn9u';z.t=+new Date;$.
+type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+</script>
+<!--End of Zopim Live Chat Script-->
+</body>
+</html>

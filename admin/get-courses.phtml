@@ -1,0 +1,34 @@
+<?php $this->headTitle('Courses'); ?>
+<br/>
+	<div id="page_content">
+		<div id="content">
+		<div class="box">
+			<div class="box_content">
+			<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+			<br/>
+			<br/>
+			<form>
+			<table style="font-size:25px;width:595px;"><tr><td>Courses</td></tr></table>
+			<br/>
+			<?php 
+					foreach($this->courses as $course)
+					{
+			?>
+			
+			<table style="border:2px solid gray;width:595px;color:gray;cell-padding:15px;table-layout:fixed;">
+			<tr>
+			<td>
+					<a href="/admin/view-discount/
+					course_id/<?php echo $course->course_id?>/title/<?php echo $course->title;?>/">
+					<?php echo $course->title;?></a>
+					</td>
+			</tr>
+			<input type="hidden" name="course_id" value="<?php echo $course->course_id;?>"/></form>
+	</table>
+	<?php 
+			}
+	?>			
+
+</div></div></div></div>
+
+<!--/buckets-->

@@ -1,0 +1,34 @@
+<?php $this->headTitle('Create Discount Code'); ?>
+<div id="page_content">
+	<div id="content">
+		<div class="box">
+			<div class="box_content">
+
+<div>
+<br/>
+<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+	<br/>
+	<br/>
+<form method="post" action="/admin/discount-code">
+<p style="font-size:30;color:orange;">Enter the User id: 
+<div style="text-align: left">
+	<input type="number" name="user_id" placeholder="User id" /></p></div><br/>
+<p style="font-size:30;color:orange;">Enter the Course id:
+	<div style="text-align: left">
+	<input type="number" name="course_id" placeholder="Course id"/></p><br/></div>
+<p style="font-size:30;color:orange;">Enter the Discount code: 
+	<div style="text-align: left">
+	<input type="text" name="discount_code" placeholder="Discount code"/></p><br/></div>
+<p style="font-size:30;color:orange;">Enter the Discount Percentage: 
+	<div style="text-align: left">
+	<input type="text" name="discount_percentage" placeholder="Discount percentage"/></p><br/></div>
+<p style="font-size:30;color:orange;">Enter One time: 
+<div style="text-align: left">
+	<input type="text" name="one_time" placeholder="One time"/></p><br/>
+<p><input type="submit" value="submit"></p>
+</div>
+</form>
+<?php 
+	echo $this->message;
+?>
+</div></div></div></div></div>

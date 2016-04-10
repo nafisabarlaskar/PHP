@@ -1,0 +1,94 @@
+<!-- TinyMCE -->
+<script type="text/javascript" src="/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		mode : "specific_textareas",
+        editor_deselector : "video_url_tiny",
+		theme : "simple"
+	});
+</script>
+<!-- /TinyMCE -->
+
+<div id="buckets">
+	<div class="grid2col">
+		<div><h2>&nbsp;</h2>
+		<h2>Edit Topic</h2>
+			
+	<hr/><br/>
+		
+	
+	
+	
+	<div style="padding-bottom:5px;padding-top:5px;">
+	
+
+
+	<form method="post" action="/admin/edit-topic">
+		<div class="row">
+			<div class="label">Topic Name</div>
+			<div style="float:left">	
+				<input type="text" name="topic_name" size="60" value="<?php echo $this->topic->topic_name;?>"/>			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">Topic Number</div>
+			<div style="float:left">	
+				<input type="text" name="topic_order" size="3" value="<?php echo $this->topic->topic_order ?>"/>			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">Video URL</div>
+			<div style="float:left">	
+				<textarea class="video_url_tiny" name="video_url" rows="3" cols="50">
+					<?php echo htmlspecialchars($this->topic->video_url);?>
+				</textarea>			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">Notes</div>
+			<div style="float:left">	
+				<textarea name="notes" rows="15" cols="50">
+						<?php echo $this->topic->notes;?>
+				</textarea>			
+			</div>
+		</div>
+		
+		<div class="row">
+		<div class="label">Is Sample </div>
+		<div style="float:left">
+			<select name="is_sample">
+			<?php if ($this->topic->is_sample=="Y") { ?>
+				<option selected value="Y">Yes</option>
+				<option value="N">No</option>
+			<?php } else { ?>
+				<option value="Y">Yes</option>
+				<option selected value="N">No</option>
+			<?php } ?>
+			
+								
+			</select>	                                    
+		</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">
+				<input type="submit" value=" Edit Topic "/>  &nbsp;&nbsp; <a href="/admin/view-course/course_id/<?php echo $this->topic->course_id;?>">Cancel</a>
+			</div>
+		</div>
+		<input type="hidden" name="course_id" value="<?php echo $this->topic->course_id;?>"/>
+		<input type="hidden" name="topic_id" value="<?php echo $this->topic->topic_id;?>"/>
+		<input type="hidden" name="topic_video_id" value="<?php echo $this->topic->topic_video_id;?>"/>
+		<input type="hidden" name="video_id" value="<?php echo $this->topic->video_id;?>"/>
+	</form>			
+
+	
+	
+	
+	
+			</div>
+		</div>						
+	</div> <!-- end grid2col -->			
+</div><!--/buckets-->

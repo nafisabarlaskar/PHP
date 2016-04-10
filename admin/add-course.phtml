@@ -1,0 +1,114 @@
+
+<script type="text/javascript" src="/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		mode : "specific_textareas",
+        editor_deselector : "intro_video",
+		theme : "simple"
+	});
+</script>
+
+<!-- /TinyMCE -->
+
+
+<?php 
+//$errorsMessages =$this->form->getMessages();
+//print_r($errorsMessages);
+//print_r($this->faculty);
+?>
+<br/>
+<div id="buckets">
+	<div class="grid2col">
+		<section class="create_course"><h2>Create New Course</h2>
+			<br/>
+			<p>
+		
+			<form method="post" action="/admin/add-course">
+	<div class="row">
+		<div class="label">Title</div>
+		<div>
+			<input type="text" name="title" size="60"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Faculty</div>
+		<div style="float:left">
+			<select multiple="multiple" size="4" name="faculty_ids[]" id="faculty_ids[]">				
+				<?php foreach ($this->faculty as $faculty): ?>
+					<option value="<?php echo $faculty->user_id; ?>"><?php echo $faculty->first_name.' '.$faculty->last_name; ?></option>
+				<?php endforeach;?>
+			</select>	                                    
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Duration</div>
+		<div style="float:left">
+			<input type="text" name="duration"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Fees</div>
+		<div style="float:left">
+			<input type="text" name="fees"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">How will this Certificate benefit you</div>
+		<div style="float:left">
+			<textarea name="benefits" rows="5" cols="30"></textarea>			
+		</div>
+	</div>
+	
+	
+	
+	<div class="row">
+		<div class="label">What will you learn</div>
+		<div style="float:left">
+			<textarea name="placement_assistance" rows="15" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">What Jobs does this Certificate prepare me for</div>
+		<div style="float:left">
+			<textarea name="job_types" rows="15" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">How will you learn</div>
+		<div style="float:left">
+			<textarea name="learning_mode" rows="15" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">FAQ</div>
+		<div style="float:left">
+			<textarea name="faq" rows="15" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Testimonials</div>
+		<div style="float:left">
+			<textarea name="testimonials" rows="15" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">
+			<input type="submit" value="Create Course"/>
+		</div>
+	</div>
+	
+</form>
+			</p>
+		</section>				
+	</div>			
+</div><!--/buckets-->
+

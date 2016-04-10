@@ -1,0 +1,123 @@
+<!-- TinyMCE -->
+<script type="text/javascript" src="/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		mode : "specific_textareas",
+        editor_deselector : "intro_video",
+		theme : "simple"
+	});
+</script>
+
+<!-- /TinyMCE -->
+
+
+<?php 
+//$errorsMessages =$this->form->getMessages();
+//print_r($errorsMessages);
+//print_r($this->faculty);
+?>
+<br/>
+<div id="buckets" >
+	<div class="grid2col">
+		<section class="create_course"><h2>Update Course</h2>
+			<br/>
+			<p>
+		
+	<form action="/admin/update-course" method="post">
+		<div class="row">
+		<div class="label">Title</div>
+		<div>
+			<input type="text" name="title" value="<?php echo $this->course->title;?>"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Faculty </div>
+		<div style="float:left">
+			<select multiple="multiple" name="faculty_ids[]" id="faculty_ids[]">				
+					<?php foreach ($this->faculty as $faculty) { 
+							if(in_array($faculty->user_id,$this->faculty_id_array)) {							
+					?>
+						<option selected value="<?php echo $faculty->user_id; ?>"><?php echo $faculty->first_name.' '.$faculty->last_name; ?></option>
+					<?php } else { ?>	
+						<option value="<?php echo $faculty->user_id; ?>"><?php echo $faculty->first_name.' '.$faculty->last_name; ?></option>
+					<?php 
+							} //end if
+							} //end for?>
+			</select>	                                    
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Duration</div>
+		<div style="float:left">
+			<input type="text" name="duration"  value="<?php echo $this->course->duration;?>"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Fees</div>
+		<div style="float:left">
+			<input type="text" name="fees"  value="<?php echo $this->course->fees;?>"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">How will this Certificate benefit you</div>
+		<div style="float:left">
+			<textarea name="benefits" rows="15" cols="50"><?php echo $this->course->benefits;?></textarea>			
+		</div>
+	</div>
+	
+	
+	
+	<div class="row">
+		<div class="label">What will you learn</div>
+		<div style="float:left">
+			<textarea name="placement_assistance" rows="15" cols="50"><?php echo $this->course->placement_assistance;?></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">What Jobs does this Certificate prepare me for</div>
+		<div style="float:left">
+			<textarea name="job_types" rows="15" cols="50"><?php echo $this->course->job_types;?></textarea>			
+		</div>
+	</div>
+	
+	<div class="row" >
+		<div class="label">How will you learn</div>
+		<div style="float:left">
+			<textarea name="learning_mode" rows="15" cols="50"><?php echo $this->course->learning_mode;?></textarea>			
+		</div>
+	</div>
+	
+	<div class="row" >
+		<div class="label">FAQ</div>
+		<div style="float:left">
+			<textarea name="faq" rows="15" cols="50"><?php echo $this->course->faq;?></textarea>			
+		</div>
+	</div>
+	
+	<div class="row" >
+		<div class="label">Testimonials</div>
+		<div style="float:left">
+			<textarea name="testimonials" rows="15" cols="50"><?php echo $this->course->testimonials;?></textarea>			
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div class="row">
+		<div class="label">
+			<input type="submit" value=" Update Course "/>
+		</div>
+	</div>
+	<input type="hidden" name="course_id" value="<?php echo $this->course->course_id?>"/>
+</form>
+			</p>
+		</section>				
+	</div>			
+</div><!--/buckets-->

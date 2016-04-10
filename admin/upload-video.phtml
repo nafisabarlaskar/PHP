@@ -1,0 +1,28 @@
+<?php $this->headTitle('Upload Video'); ?>
+<div id="page_content">
+	<div id="content">
+		<div class="box">
+			<div class="box_content">
+<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+<div style="text-align:center;"><br/>
+
+<p style="font-weight:bold;font-color:gray;font-size:20px;">Upload Video</p><br/>
+<p style="font-weight:bold;font-color:gray;font-size:15px;">
+<?php 
+	echo "".$this->topic_name.".";
+?></p>
+<p>Enter the Video URL here:</p>
+ <form method="post" action="/admin/upload-video">
+
+
+<p><textarea rows="6" cols="50" name="video_url_hd"><?php echo $this->video_url?></textarea></p>
+<input type="hidden" name="topic_id" value="<?php echo $this->topic_id;?>"/>
+<input type="hidden" name="course_id" value="<?php echo $this->course_id;?>"/>
+<input type="hidden" name="batch_id" value="<?php echo $this->batch_id;?>"/>
+<input type="hidden" name="video_id" value="<?php echo $this->video_id;?>"/>
+<p><input type="submit" value="submit"></p>
+			
+
+</form>
+</div>
+</div></div></div></div>

@@ -1,0 +1,81 @@
+<?php $this->headTitle('Display topics'); ?>
+<div id="page_content">
+	<div id="content">
+
+<div>
+
+ <a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+ <br/>
+ <br/>
+ <p style="font-size: 21px;">
+  <?php 
+ 	
+ 	echo $this->start_date.' '.$this->start_month.'Batch';
+ 	
+ ?>
+ 
+</p>
+<br/>			
+	<table style="border:1px gray;width:800px;font-size:20px;font-weight: bold;"><tr>
+	<td style="width:600px;">Topics</td>
+	<td style="width:200px;">Video</td>	
+	</tr>
+	</table>
+	<br/>
+		
+ <?php 
+	foreach($this->videos as $video)
+	{
+	?>
+	<table style="width:800px;">
+	<br/><tr>
+	<td width="200px">
+	<p  style="font-weight:bold;">
+	<?php 
+		if ($video->parent_topic_id==0)
+		{
+			 echo $video->topic_name;
+		}
+		else {
+		
+?>
+</p>
+
+</td>
+
+</tr>
+<tr>
+	
+	<td width="600px">
+	<a href="/admin/upload-video/topic_id/<?php echo $video->topic_id;?>/course_id/<?php echo $this->course_id;?>/batch_id/<?php echo $this->batch_id;?>/video_id/<?php  echo $video->video_id;?>/topic_name/
+	<?php echo $video->topic_name;?>">
+	
+		<?php echo $video->topic_name;?>
+	
+	</a>
+	</td>
+	<td width="200px">
+	<?php
+	if ($video->parent_topic_id != 0)
+	{
+		if($video->video_url_hd != null)
+		{
+			echo "Video";
+		}
+		else 
+			echo "No Video";
+	}
+	?>
+	</td>
+	
+	
+	
+	</tr>
+	</table>
+<?php 
+}
+	}
+?>
+
+
+</div></div></div></div></div>

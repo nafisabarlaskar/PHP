@@ -1,0 +1,77 @@
+<!-- TinyMCE -->
+<script type="text/javascript" src="/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		mode : "specific_textareas",
+        editor_deselector : "video_url_tiny",
+		theme : "simple"
+	});
+</script>
+<!-- /TinyMCE -->
+
+
+<div id="buckets">
+	<div class="grid2col">
+		<div><h2>&nbsp;</h2>
+		<h2>Add Topic</h2>
+			
+	<hr/><br/>
+		
+	
+	
+	
+	<div style="padding-bottom:5px;padding-top:5px;">
+	
+
+
+	<form method="post" action="/admin/add-topic">
+		<div class="row">
+			<div class="label">Topic Name</div>
+			<div style="float:left">	
+				<input type="text" name="topic_name" size="60"/>			
+			</div>
+		</div>
+				
+		<div class="row">
+			<div class="label">Video URL</div>
+			<div style="float:left">	
+				<textarea class="video_url_tiny" name="video_url" rows="3" cols="50"></textarea>			
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">Notes</div>
+			<div style="float:left">	
+				<textarea name="notes" rows="15" cols="50"></textarea>			
+			</div>
+		</div>
+		
+		<div class="row">
+		<div class="label">Is Sample </div>
+		<div style="float:left">
+			<select name="is_sample">			
+				<option selected value="N">No</option>
+				<option value="Y">Yes</option>
+				
+			</select>	                                    
+		</div>
+		</div>
+		
+		<div class="row">
+			<div class="label">
+				<input type="submit" value=" Add Topic "/>  &nbsp;&nbsp; <a href="/admin/view-course/course_id/<?php echo $this->course_id;?>">Cancel</a>
+			</div>
+		</div>
+		<input type="hidden" name="course_id" value="<?php echo $this->course_id;?>"/>
+		<input type="hidden" name="chapter_id" value="<?php echo $this->chapter_id;?>"/>
+		
+	</form>			
+
+	
+	
+	
+	
+			</div>
+		</div>						
+	</div> <!-- end grid2col -->			
+</div><!--/buckets-->

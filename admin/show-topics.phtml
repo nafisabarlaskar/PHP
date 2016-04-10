@@ -1,0 +1,44 @@
+<?php $this->headTitle('Display topic'); ?>
+<div id="page_content">
+	<div id="content">
+		<div class="box">
+			<div class="box_content">
+
+<div>
+<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+ <br/>
+ <br/>
+ <p style="font-weight: bold;font-size:21px;">
+ <?php
+ 
+ echo $this->start_date.' '.$this->start_month.'Batch';
+ ?>
+ </p>
+  <br/>
+  <?php 
+	foreach($this->topic_array as $topic)
+	{
+	?>
+	<p style="font-weight: bold;">
+	<?php 
+		if ($topic['parent_topic_id']==0)
+		{
+			 echo $topic['topic_name'];
+		}
+		else {
+?>
+</p>
+	
+	<a href="/admin/insert-video/topic_id/<?php echo $topic['topic_id'];?>/course_id/<?php echo $this->course_id;?>/batch_id/<?php echo $this->batch_id;?>/topic_name/
+	<?php echo $topic['topic_name'];?>">
+		<?php echo $topic['topic_name'];?>
+	<br/>
+	</a>
+	<br/>
+	
+<?php 
+}
+	}
+?>
+
+</div></div></div></div></div>

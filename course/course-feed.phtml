@@ -1,0 +1,242 @@
+<?php $this->headMeta()->setName('description',$this->course->title." - Discussion Forum | DeZyre");?>
+<?php $this->headMeta()->setName('title','Most recent '.$this->course->title.' questions | DeZyre');?>
+<?php $this->headMeta()->setName('keywords',$this->keywords);?>
+<?php $this->headTitle('Most recent '.$this->course->title.' questions | DeZyre'); ?>
+
+
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.1.8.20.min.js"></script>
+<script type="text/javascript" src="/js/tagit.js"></script>
+<script type="text/javascript" src="/js/jquery.json-2.4.js"></script>
+<link href="/css/jquery-ui-base-1.8.20.css?v=1" media="screen" rel="stylesheet" type="text/css" />
+<link href="/css/tagit-awesome-blue.css?v=1" media="screen" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/js/course-feed.js?v=4"></script>
+
+
+<div class="banner">
+<div class="banner_in">
+	<div class="banner_full">
+		<h1><span itemprop="name" style="font-size:24px"><?php echo $this->course->title;?> - Discussion Forum</span></h1>				
+	</div>	
+</div>
+</div>
+
+<br/>
+<div id="page_content">
+
+	<div id="course_sidebar">
+		<div class="box">
+			<div class="box_content">
+					<?php include("course-menu.phtml"); ?>					
+			</div>
+		</div>
+	
+	</div>
+	
+	<div id="course_content">
+			
+		<input type="hidden" id="course_id" name="course_id" value="<?php echo $this->course->course_id;?>"/>
+		
+							
+		<div class="box">
+			<div class="box_content">
+				
+				<div class="question_heading"><h2>Ask Question</h2></div>
+				<br/>
+				<div id='question-error' style='color:red;margin-bottom:10px'></div>
+				<form>
+					<div style="width:99%;;float:left">
+						<div style="border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;float:left;width:100%">
+							<div style="width:15%;float:left;padding:15px 10px;"><h3>Question</h3></div>
+							<div style="float:left;padding:10px;width:78%;background-color:whitesmoke">
+								<input class="text_field" type="text" size="72" maxlength="200" id="question_title" placeholder="Type the question title here"/>
+																
+							</div>
+						</div>
+						<div style="float:left;width:100%;border-bottom:1px solid #e0e0e0">
+							<div style="width:15%;float:left;padding:15px 10px;"><h3>Details</h3></div>
+							<div style="float:left;padding:10px;background-color:whitesmoke;width:78%;">
+								<textarea style="height:100px" class="textarea_field" id="question" placeholder="Explain your question in detail"></textarea>
+									
+							</div>
+						</div>
+						<?php if($this->faculty!=null) {?>
+						<input type="hidden" id="faculty_id" name="faculty_id" value="<?php echo $this->faculty[0]->user_id;?>"/>
+						<?php } else {?>
+						<input type="hidden" id="faculty_id" name="faculty_id" value="<?php echo $this->faculty_id;?>"/>
+						<?php }?>
+						<!-- 
+						<?php if (count($this->faculty)!=1) { ?>
+						<div style="float:left;width:100%">
+						<div style="width:15%;float:left;padding:10px 10px;"><h2>Select Faculty</h2></div>
+						<div style="float:left;height:20px;background-color:whitesmoke;padding:10px;width:79%">
+								<select name="faculty_id" id="faculty_id">				
+								<?php foreach ($this->faculty as $faculty): ?>
+									<option value="<?php echo $faculty->user_id; ?>"><?php echo $faculty->first_name.' '.$faculty->last_name; ?></option>
+								<?php endforeach;?>
+							</select>
+						</div>
+						</div>
+						<?php } 
+						else {
+						?>
+						<input type="hidden" id="faculty_id" name="faculty_id" value="<?php echo $this->faculty[0]->user_id;?>"/>
+						<?php } ?>
+						 -->
+						
+						
+						<div style="border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;float:left;width:100%">
+							<div style="width:15%;float:left;padding:15px 10px;"><h3>Topics</h3><span style="font-size:75%">(Comma separated)</span></div>
+							<div style="float:left;padding:10px;width:78%;background-color:whitesmoke">
+								<ul id="tag_questions" class="tagit">							
+								<li class="tagit-new"><input id="tag_list" class="tagit-input ui-autocomplete-input" type="text" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" placeholder="Type topics seperated by comma"></li>
+								<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul></ul>
+								<span style="font-size:75%;">(egs Balance Sheet, IPO, Income Statement)</span>								
+							</div>
+						</div>
+												 
+						<input type="hidden" id="user_id" value="<?php echo $this->loggedInAs()->getId();?>"/>
+						<?php if(!Zend_Auth::getInstance()->hasIdentity()) { ?>
+						<div id="loginbox" style="float:left;width:100%;">
+							<div style="float:left;width:60%;margin-top:20px;margin-bottom:20px;border:1px solid #ccc;background-color:whitesmoke;padding:20px">
+							<div id='response-error' style='color:red;margin-bottom:10px'></div>
+							<div style="float:left;width:100%">
+								<div style="float:left;width:25%;font-weight:bold">Email</div>
+								<div style="float:left"><input class="text_field" type="text" id="email" name="email" size="40"/></div>
+							</div>
+							<div style="float:left;width:100%;margin-top:10px">
+								<div style="float:left;width:25%;font-weight:bold">Password</div>
+								<div style="float:left"><input class="text_field" type="password" id="password" name="password" size="40"/></div>
+							</div>
+							</div>
+						</div>
+						<?php }?> 
+						 
+						 
+						<div style="float:left;width:100%">
+							<div style="width:15%;float:left;padding:15px 10px;"></div>
+							<div style="float:right;padding:10px 5px;">
+								<input id="question_submit" class="blue_button submit" type="submit" value=" Ask Question " style="display:inline"/>	
+							</div>
+						</div>
+						
+					</div>
+				</form>
+				
+				<br/>
+				
+			</div>
+		</div>
+		
+		<br/><br/>
+		<div class="box">
+			<div class="box_content">
+				
+				<div id="wall">
+				<?php 
+				if($this->questions != null) {
+				foreach($this->questions as $question) { 
+				?>
+				<div id="question_div_<?php echo $question->course_question_id;?>" class="question_div">
+					<div style="width:12%;float:left"> <!-- start photo div -->
+						<!-- <img alt="" src="/images/user/default.png" width="50"/> -->
+						<img width="50" height="50" src='/user/view-image/user_id/<?php echo $question->user_id;?>/n/1'/>
+					</div> <!-- end photo div -->
+					<div style="width:88%;float:left;border:0px solid red"> <!-- start non photo div -->
+					<b>
+					<?php
+						$url='';
+						if($question->company!=null)
+							$url=$question->company.' ';
+						if($question->designation!=null)
+							$url.=$question->designation.' ';
+						if($question->college!=null)
+							$url.=$question->college.' ';
+							
+						$name = $question->questioner_name;
+						
+						if($name==null) {
+							$email_front= explode("@",$question->questioner_email);
+							$name=$email_front[0];	
+						}	
+						$url .=$name;
+						$url = str_replace(" ", "-", trim($url));					
+					?>
+					
+					<a href="<?php echo $this->url(array('user_id' => $question->user_id,'user_title' => $url),'viewuser');?>">
+						<?php echo $name;?>
+					</a>
+					
+					</b><br/>	
+					
+					<?php if($question->question_title !=null) { ?>
+					<div class="question_title">
+					<h2>					
+					<a href="<?php echo $this->url(array('course_question_id' => $question->course_question_id,'question_title' => strtolower(trim(preg_replace(array('~[^0-9a-z\'\?]+~i','/\?/','/\'/'), array('-','',''), html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '-', htmlentities($question->question_title, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8'))))),'viewquestion');?>">
+						<?php echo $question->question_title."<br/>";?>
+					</a>									
+					</h2>
+					
+					<?php if($question->question!=null && strlen($question->question)>0) { ?>					
+						<?php echo 	substr(str_replace('<br />', ' ', $question->question),0,200);?>...
+					<?php } ?>
+					<div style="padding-top:10px;width:600px;">
+					<?php 
+					$tags = $this->tag_array[$question->course_question_id];
+					foreach($tags as $tag) { ?>
+						
+						<a class="tag_button" href="<?php echo $this->url(array('tag_id' => $tag->tag_id,'tag_name' => strtolower(trim(preg_replace(array('~[^0-9a-z\'\?]+~i','/\?/','/\'/'), array('-','',''), html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '-', htmlentities($tag->tag_name, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8'))))),'viewtag');?>">
+							<?php echo $tag->tag_name;?>
+						</a>&nbsp;&nbsp;
+					<?php 
+					} 
+					
+					?>
+					</div>
+					</div>
+					<?php } ?>
+					
+					
+					
+					<div>
+						<div style="float:left"><span class="grey_tiny_text"><?php echo $question->question_date;?> </span></div>
+						<?php if(Zend_Auth::getInstance()->hasIdentity()) { ?>
+							<div style="float:right">
+								<?php if($this->loggedInAs()->getId()==$question->user_id) { ?>
+									<a class="delete_question blue_tiny_text" id="<?php echo $question->course_question_id?>" href="">Delete</a> &nbsp;&nbsp;&nbsp;
+								<?php }?>								
+							</div>
+						<?php }?>
+					</div>
+					
+					
+					</div> <!-- end non photo div -->
+				</div> <!-- end question div -->
+				<?php }} // end for loop for questions
+				?>
+				
+				
+				</div> <!--  end wall -->
+				<?php 
+				//if($this->questions != null && count($this->questions)>0) { 
+				if($this->questions != null && count($this->questions)>=Zend_Registry::getInstance()->configuration->number->records) { ?>
+				
+				<div id="more_questions_link">
+				<br/><br/>
+					<div><a style="float:left;width:98%" class="more_questions whitesmoke_button" href="/course/next-questions/course_id/<?php echo $this->course->course_id;?>/start_pos/<?php echo $this->start_pos;?>/feed/course" id="<?php echo $this->start_pos;?>">More Questions</a></div>
+				</div>
+				<?php } ?>
+				
+				
+				
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+
+

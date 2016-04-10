@@ -1,0 +1,56 @@
+<?php $this->headTitle('Discount'); ?>
+<div id="page_content">
+	<div id="content"><br/>
+	<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+	<br/>
+	<br/>
+	<p style="font-size:17px;font-weight:bold;">Course <?php echo $this->course_id?>: <?php echo " ".$this->title?></p><br/>
+			<table style="border:2px solid gray;width:800px;color:black;font-weight:bold;table-layout:fixed;
+	cell-padding:15px;">
+	<tr>
+		
+		<td width="100px">User_id</td>
+		<td width="200px" style="text-align: center;">Discount Code</td>
+		<td width="200px" style="text-align: center;">Discount Percentage</td>
+		<td width="100px">Is Active</td>
+		<td width="100px" style="text-align: center;">One Time</td>
+		<td width="105px" style="text-align: center;"></td>
+	</tr>
+	</table>
+
+			<?php foreach($this->discounts as $discount)
+			{
+			
+			?>
+			
+			<table style="border:2px solid gray;width:800px;table-layout:fixed;
+	cell-padding:15px;">
+	<tr>
+		<td width="20px"></td>
+		<td width="80px"><?php echo $discount->user_id?></td>
+		<td width="200px" style="text-align: center;"><?php echo $discount->discount_code ?> </td>
+		<td width="200px" style="text-align: center;"><?php echo $discount->discount_percentage?></td>
+		<td width="20px"></td>
+		<td width="80px"><?php echo $discount->is_active?></td>
+		<td width="100px" style="text-align: center;"><?php echo $discount->one_time?></td>
+		<form><input type="hidden" name="discount_id" value="<?php echo $discount->discount_id;?>"/>
+		<input type="hidden" name="course_id" value="<?php echo $this->course_id;?>"/>
+		<input type="hidden" name="title" value="<?php echo $this->title;?>"/>
+		</form>
+		<td width="100px" style="text-align: center;"><a href="/admin/update-discount/
+		course_id/<?php echo $this->course_id?>/
+		discount_id/<?php  echo $discount->discount_id?>/
+		user_id/<?php echo $discount->user_id?>/
+		discount_code/<?php echo $discount->discount_code ?>/
+		discount_percentage/<?php echo $discount->discount_percentage?>/
+		one_time/<?php echo $discount->one_time?>/
+		is_active/<?php echo $discount->is_active?>" 
+		style="font-size:15px;">Edit</a></td>
+	</tr>
+	</table>
+	<?php 
+			}
+			
+			?>
+			
+</div></div>

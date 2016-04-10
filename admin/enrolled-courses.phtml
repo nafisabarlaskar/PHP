@@ -1,0 +1,143 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".show_batch").live('click',function(e) {
+		e.preventDefault();
+		//alert("ok");
+		var batch_id=$(this).data("batchid");
+		var course_id=$(this).data("courseid");
+		//alert("o="+course_id);
+		
+		var select=$("#div_"+course_id+"_"+batch_id).html();
+		$("#batch_"+batch_id).html(select);
+		$("#courses_"+course_id+"_"+batch_id).hide();
+		$("#save_link_"+course_id+"_"+batch_id).show();
+		//$("#div_"+course_id).html(hello));
+		//var select=$("#course_"+course_id).val();
+		//alert("o="+$("#batch_"+batch_id).val("hello"));
+		//$("#batch_"+batch_id).val("hello");
+
+		//$("#courses_"+course_id).closest("tr").find("div_"+course_id);
+		});
+
+	$(".update_batch").live('click',function(e) {
+		e.preventDefault();
+		
+		var enroll_id=$(this).data("enrollid");
+		var batch_id=$(this).data("batchid");
+		var selected_batch_id=$("#course_"+batch_id).val();
+		//alert(selected_batch_id);
+		var course_id=$(this).data("courseid");
+		//alert(enroll_id);
+		$.post('/admin/update-batch', {enrollment_id:enroll_id,batch_id:selected_batch_id}, function(data) {
+			if(data.success=="ok")
+			{
+				$("#save_link_"+course_id+"_"+batch_id).val("").html("<span style='color:#B00;font-weight:bold'>Batch is successfully updated</span>");									
+			}					
+			else
+			{
+				$("#log_error").html("Error in updating");
+				$("#log_error").show();
+			}
+		},"json");	
+		
+	});
+});
+</script>
+
+
+<?php $this->headTitle('Current Courses enrolled'); ?>
+<div id="page_content">
+	<div id="content">
+			<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+			<br/>
+			<br/>
+			<table style="border:2px solid gray;width:1000px;color:black;font-weight:bold;table-layout:fixed;
+	cell-padding:15px;">
+	<tr>
+		<td width="400px">Courses Enrolled</td>
+		<td width="200px" style="text-align: center;">Start Date</td>
+		<td width="350px" style="text-align: center;">Referrer</td>
+		
+	</tr>
+	</table>
+	
+			
+			<?php 
+				foreach($this->courses as $course)
+				{
+					
+			?>
+			<table style="border:2px solid gray;width:1000px;color:gray;cell-padding:15px;table-layout:fixed;">
+			<tr>
+			<td style="width:400px;" data-courseid="<?php echo $course->course_id?>" ><?php  echo $course->title;?>
+			</td>
+			<td id="batch_<?php echo $course->batch_id?>" style="width:100px;text-align:center;">
+			<?php 
+						 echo $course->start_date;
+						 ?>
+  							
+				</td>
+			
+				
+				<td  style="width:100px;">
+				<?php 
+					if ($course->batch_id != null)
+					{
+						?>
+				
+					<a data-batchid="<?php echo $course->batch_id?>" 
+					 data-courseid="<?php echo $course->course_id?>"
+					class="show_batch" 
+					id="courses_<?php echo $course->course_id?>_<?php echo $course->batch_id?>"
+					href="#">Edit</a>
+					
+					<a style="display:none" data-batchid="<?php echo $course->batch_id?>" 
+					 data-enrollid="<?php echo $course->enrollment_id?>"
+					 data-courseid="<?php echo $course->course_id?>"
+					class="update_batch" 
+					id="save_link_<?php echo $course->course_id?>_<?php echo $course->batch_id?>"
+					href="#">Save
+					<span style="width:50%;color:#B00;font-weight:bold;font-size:14px;" id="log_error"></span>	</a>
+					
+					<?php 
+					}
+				?>
+				
+				</td>
+				<td style="text-align: center;overflow: hidden; width: 300px;whitespace: nowrap;text-overflow: ellipsis;">
+				<?php echo $course->referrer;?></td>
+				</tr>
+				</table>
+				
+				<?php 
+				if ($course->batch_id != null)
+				{
+					?>
+					<div id="div_<?php echo $course->course_id?>_<?php echo $course->batch_id?>" 
+				style="display: none;">
+				<select id="course_<?php echo $course->batch_id?>" >
+				<?php 
+				foreach($this->batches as $batch)
+				{
+					?>
+				<option value="<?php echo $batch->batch_id; ?>">
+				<?php echo $batch->starting_date; ?>
+				</option>
+				<?php 
+					}
+					?>
+				</select>
+				</div>
+				<?php
+				}
+					?>
+					
+				
+					
+					
+			
+			<?php 	
+				}
+			?>
+			
+</div></div>

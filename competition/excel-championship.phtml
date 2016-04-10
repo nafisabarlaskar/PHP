@@ -1,0 +1,181 @@
+<?php $this->doctype('XHTML1_RDFA');?>
+<script type="text/javascript" src="/js/jquery.the-modal.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/transcript.css"/>
+
+
+<?php $this->headTitle($this->competition->meta_title); ?>
+<?php $this->headMeta()->setName('description',$this->competition->meta_description);?>
+<?php $this->headMeta()->setName('keywords',$this->competition->meta_keywords);?>
+
+
+<?php $this->headMeta()->setProperty("og:title", $this->competition->meta_title);?>
+<?php $this->headMeta()->setProperty("og:description", $this->competition->meta_description);?>
+<?php $this->headMeta()->setProperty("og:url", Zend_Registry::getInstance()->configuration->app->url."/excel-championship/");?>
+<?php $this->headMeta()->setProperty("og:image", Zend_Registry::getInstance()->configuration->app->url."/images/excel-championship.png");?>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	$("#excel_register").live("click", function (a) {
+		a.preventDefault();        
+    	$('#register_excel_championship').modal().open();    	
+	});
+
+	// attach modal close handler
+	$('.modal_activate .close').on('click', function(e){
+		e.preventDefault();
+		$.modal().close();
+		location.reload();
+	});
+
+	$("#register-excel").live("click", function (a) {	        
+        a.preventDefault();
+        
+        var first_name = $("#first_name").val();
+        var last_name = $("#last_name").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+        
+        if (!validateEmail(email) || !validatePhone(phone) || !validateName(first_name) || !validateName(last_name)) {
+            $("#response").html("<span style='color:red'>Please enter a valid Email, Full Name and 10 digit phone</span>");	            	            
+        } else {
+        	$("#register_now_button").hide();	           
+        	$.post('/competition/register', {email:email,phone:phone,first_name:first_name,last_name:last_name}, function(data) {            	
+        		if(data.success=="ok")
+				{       				
+        			$("#activate_course").hide();
+        			$("#activated").html("<span>You have been registered for the competition. We will send you an email before 10th February.</span>");        			
+				}					
+				else
+				{				
+					window.location.href = "/error/exception/";				
+				}	
+			 },"json");			 
+        }        
+    });
+
+	function validateEmail(email) { 
+	    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	} 
+
+	function validateName(name) { 
+	    if(name!=null && name.trim().length>0)
+		    return true;
+	}
+	
+	function validatePhone(phone) {  
+	  var phoneno = /^\d{10}$/;  
+	  return phoneno.test(phone);	    
+	}
+	
+	
+})
+
+
+</script>
+
+<div style="min-width:1000px;background-position:center top;background:#007233;position:relative;z-index:20;padding-bottom:0px;margin:0 auto 0px auto;border-bottom:1px solid #d9d9d9;margin-top:-8px">
+<div class="banner_in" style="background-color:#007233;">
+	<div class="banner_home_left" style="text-align:left">	
+	
+	
+	<div style="text-align:center;line-height:20px;padding-top:5px;">
+		<h1 style="color:#fff;font-size:42px"><?php echo $this->competition->title;?>	
+	</div>
+	<br/><br/>
+		 <div style="font-size:1.2em;color:#fff;line-height:30px;">
+		
+			<span style="font-size:12px;font-weight:bold">></span><span style="font-size:24px;font-weight:bold"> Win <?php echo $this->competition->prize;?></span><br/>
+			<span style="font-size:12px;font-weight:bold">></span> Entries close: <?php echo $this->competition->deadline;?><br/>
+						
+		</div>
+		<br/>
+		<div style="padding-left:0px;width:410px;line-height:22px;padding-bottom:10px">
+			<a id="excel_register" class="yellow_button" href="#">
+					Register Now
+				</a>
+		</div>		
+		
+	
+	</div>
+	<div class="banner_home_right" style="margin-left:50px;">
+		<div style="width:370px ;margin-left: auto ; margin-right: auto;">
+			<img src="<?php echo $this->filesUrl()->imageUrl();?>/images/excel-championship.png" width="370" height="240"  alt="side" />	
+		    
+    	</div> <!-- end gallery --> 
+	</div>
+</div>
+</div>
+<div id="page_content">
+<div id="content">
+<br/>
+
+<?php echo $this->competition->rules;?>
+<br/>
+<h2><b>Our Partners</b></h2>
+<br/>
+<div style="width:100%">
+	<div>
+		<div><a href="http://www.businessbecause.com/homepage" target="_blank"><img src="http://files.dezyre.com/images/excel_partners/businessbecause.png"/></a></div>
+	</div>
+</div>
+</div>
+<div id="sidebar">
+	<br/>
+	<!-- 
+	<div class="box">
+					<div class="title"><h2 style="font-weight:bold;font-size:16px;">Total Participants: 0</h2></div>
+					<div id="box_content" style="text-align: center">		
+					<div>			
+						
+					</div>						
+					</div>
+	</div>
+	 --> 
+</div>
+</div>
+
+	
+<div id="register_excel_championship" style="display: none;padding:10px;height:280px" class="modal_activate">
+	<a href="#" class="close">&times;</a>
+	<div id="activate_course" style="padding:20px">
+		
+		<span style="font-size:16px;color:blue;font-weight:bold">Register for World Excel Championship</span>
+		<br/><br/>
+		
+		<div id='response' style='padding-top:5px;color:red'></div>
+		<div style="width:100%;display:block">
+			<div style="width:100%;display:block;float:left;padding:5px;">
+				<div style="float:left;width:30%"><b>First Name</b></div>
+				<div style="float:left"><input type="text" style="padding:5px" id="first_name" name="first_name" size=30/></div>
+			</div>
+			<div style="width:100%;display:block;float:left;padding:5px;">
+				<div style="float:left;width:30%"><b>Last Name</b></div>
+				<div style="float:left"><input type="text" style="padding:5px" id="last_name" name="last_name" size=30/></div>
+			</div>
+			<div style="width:100%;display:block;float:left;padding:5px;">
+				<div style="float:left;width:30%"><b>Email</b></div>
+				<div style="float:left"><input type="text" style="padding:5px" id="email" name="email" size=30/></div>
+			</div>
+			<div style="width:100%;display:block;float:left;padding:5px;">
+				<div style="float:left;width:30%"><b>Phone</b></div>
+				<div style="float:left"><input type="text" style="padding:5px" id="phone" name="phone" size=30/> (egs: 9900056767)</div>
+			</div>
+			<div id="register_now_button" style="width:100%;display:block;float:left;padding:5px;">
+				<div style="float:left;width:30%">&nbsp;</div>
+				<div style="float:left"><a href="" style="padding:5px;width:160px;font-weight:bold;font-size:14px" class="silver_button button-submit" id="register-excel">Register Now</a></div>
+			</div>
+		</div>
+		<br/><br/>
+		
+	</div>
+	<div id='activated' style='padding:40px;color:green'></div>
+</div>
+
+
+
+ 

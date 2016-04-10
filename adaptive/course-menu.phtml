@@ -1,0 +1,35 @@
+<?php if($this->is_quiz_completed=='Y') { 
+	if($this->course->has_batch!='Y') {
+?>
+	<a href="/course/play-video/topic_id/<?php echo $this->topic->topic_id;?>?iframe=true&width=900&height=530" rel="prettyPhoto" title="<?php echo $this->topic->topic_name;?>">Watch Video</a>			
+	<br/><br/>			
+<?php }?>
+	<a id="start_quiz" href="">Review Quiz</a>
+	<br/><br/>
+<?php } else { 
+	if($this->course->has_batch!='Y') {
+?>
+	<a href="/course/play-video/topic_id/<?php echo $this->topic->topic_id;?>?iframe=true&width=900&height=530" rel="prettyPhoto" title="<?php echo $this->topic->topic_name;?>"><span style="color:red">Step 1</span> - <b>Watch Video</b></a>			
+	<br/><br/>
+<?php }?>
+	<a id="start_quiz" href=""><span style="color:red">Step 2</span> - <b>Take Quiz</b>	</a>
+	<br/><br/>
+<?php } ?>	
+				
+				
+<a href="/course-details/<?php echo $this->course->course_id;?>">Course Home</a>
+	<br/><br/>	
+	<a href="/course/course-feed/course_id/<?php echo $this->course->course_id;?>" >Ask a Question</a>
+	<br/><br/>								
+	<a href="/course/course-feed/course_id/<?php echo $this->course->course_id;?>" >Discussion Forum</a>
+	
+<?php if($this->loggedInAs()->getId()!=null) {?>
+	<br/><br/>							
+	<a href="/course/my-feed/course_id/<?php echo $this->course->course_id;?>" >My Questions</a>
+	<?php if($this->course->course_id=='1') { ?>	
+	<!-- 						
+		<br/><br/>							
+		<a href="/course/course-notes/course_id/<?php echo $this->course->course_id;?>" >Course Notes</a>
+	 -->
+	<?php } ?>
+<?php } ?>

@@ -1,0 +1,171 @@
+<script language="javascript">
+
+function edit_chapter(chapter_id)
+{
+	document.getElementById('chapter_name'+chapter_id).style.display='none';
+	document.getElementById('edit_link'+chapter_id).style.display='none';
+	document.getElementById('add_topic_link'+chapter_id).style.display='none';
+	document.getElementById('chapter_name_edit'+chapter_id).style.display='block'
+}
+
+function cancel_edit_chapter(chapter_id)
+{
+	document.getElementById('chapter_name'+chapter_id).style.display='inline';
+	document.getElementById('edit_link'+chapter_id).style.display='inline';
+	document.getElementById('add_topic_link'+chapter_id).style.display='inline';
+	document.getElementById('chapter_name_edit'+chapter_id).style.display='none';
+}
+
+</script>
+<div id="buckets">
+	<div class="grid2col">
+		<div><h2>&nbsp;</h2>
+		<h2>Course: <?php echo $this->course->title;?></h2> <a href="/admin/update-course/course_id/<?php echo $this->course->course_id;?>">Update Course</a>
+			<br/>
+			<p>
+		
+			
+	<div class="row">
+		<div class="label">Faculty</div>
+		<div style="float:left">
+		<?php foreach($this->faculty as $faculty) 
+				echo $faculty->first_name .' '. $faculty->last_name.'<br/>';
+		?>	
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Duration</div>
+		<div style="float:left">
+			<?php echo $this->course->duration;?> days			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Fees</div>
+		<div style="float:left">
+			<?php echo $this->course->fees;?>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">How will this Certificate benefit you</div>
+		<div style="float:left">
+			<?php echo $this->course->benefits;?>			
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="label">What will you learn</div>
+		<div style="float:left">
+			<?php echo $this->course->placement_assistance;?>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">What Jobs does this Certificate prepare me for</div>
+		<div style="float:left">
+			<?php echo $this->course->job_types;?>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">How will you learn</div>
+		<div style="float:left">
+			<?php echo $this->course->learning_mode;?>			
+		</div>
+	</div>
+	
+	
+	
+	
+	<hr/><br/>
+	<a href="#" onclick="document.getElementById('chapter_row').style.display='block'">Add Chapter</a>	
+	
+	
+		<div class="row_hide" id="chapter_row">
+			<div class="label">Chapter Name</div>
+			<div style="float:left">
+			<form method="post" action="/admin/add-chapter">
+				<input type="text" name="chapter_name"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="hidden" name="course_id" value="<?php echo $this->course->course_id?>"/>
+				<input type="submit" value="Add"/>
+			</form>			
+			</div>
+		</div>
+	
+	<?php
+	if($this->chapters !=null && count($this->chapters)>0) {
+	?>
+		<h3>Chapters &nbsp;&nbsp;&nbsp;</h3>
+		<br/> 
+	<?php 
+	foreach($this->chapters as $chapter) {
+
+	?>
+	<div style="padding-bottom:5px;padding-top:5px;">
+	<div class="row">
+	<div id="buckets">
+		<div class="titles">
+			<span id="chapter_name<?php echo $chapter['topic_id'];?>">
+				<h4><?php echo 'Chapter '.$chapter['topic_order'].' : '.$chapter['topic_name'] ?></h4>
+			</span>
+			
+			<span id="chapter_name_edit<?php echo $chapter['topic_id'];?>" style="display:none">
+			<form method="post" action="/admin/edit-chapter">
+				<input type="text" size="50" name="topic_name" value="<?php echo $chapter['topic_name'] ?>"/> &nbsp;&nbsp;
+				Chapter Number:<input type="text" size="3" name="topic_order" value="<?php echo $chapter['topic_order'] ?>"/>
+				<input type="hidden" name="topic_id" value="<?php echo $chapter['topic_id'];?>"/>
+				<input type="hidden" name="course_id" value="<?php echo $this->course->course_id?>"/>
+				<br/><br/>
+				<input type="submit" value=" Edit "/> &nbsp;&nbsp;&nbsp;&nbsp;
+				<span id="cancel_link<?php echo $chapter['topic_id'];?>"><a href="#" onClick="cancel_edit_chapter(<?php echo $chapter['topic_id'];?>);">Cancel</a>
+			</form>
+			</span>
+		</div>
+		<div class="edit_links">
+			<span id="edit_link<?php echo $chapter['topic_id'];?>"><a href="#" onClick="edit_chapter(<?php echo $chapter['topic_id'];?>);">Edit Chapter</a> &nbsp;&nbsp;| <a href="/admin/delete-chapter/course_id/<?php echo $this->course->course_id?>/topic_id/<?php echo $chapter['topic_id'];?>">Delete Chapter</a> &nbsp;&nbsp;| </span>
+			<span id="add_topic_link<?php echo $chapter['topic_id'];?>"><a href="/admin/add-topic/course_id/<?php echo $this->course->course_id;?>/chapter_id/<?php echo $chapter['topic_id'];?>">Add Topic</a> &nbsp;&nbsp;</span>
+		</div>
+	</div>	
+	</div>
+
+	
+	
+	<?php 
+			$topics = $this->topics[$chapter['topic_id']];
+			if(count($topics)>0) {
+				foreach($topics as $topic) {
+	?>
+				<div class="row">
+				<div id="buckets">
+					<div class="titles">
+						<span id="topic_name<?php echo $topic['topic_id'];?>">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<?php echo 'Topic '.$topic['topic_order'].' : '.$topic['topic_name'] ?>
+						</span>						
+					</div>
+					<div class="edit_links">
+						<span id="topic_edit_link<?php echo $topic['topic_id'];?>"><a href="/admin/edit-topic/topic_id/<?php echo $topic['topic_id'];?>">Edit Topic</a> &nbsp;&nbsp;| <a href="/admin/delete-topic/course_id/<?php echo $this->course->course_id?>/topic_id/<?php echo $topic['topic_id'];?>">Delete Topic</a></span>						
+					</div>					
+					
+					<?php //echo htmlspecialchars_decode($topic['video_url']);?>
+				</div>	
+				</div>
+	
+	
+	<?php 
+					//echo '&nbsp;&nbsp;&nbsp;-'.$topic['topic_name'].'<br/>';					
+				}				
+			}
+		echo '</div><hr/>';			
+		} // end for loop for chapters  
+	} // end if
+	?>
+	
+	
+	
+			</p>
+		</div>						
+	</div> <!-- end grid2col -->			
+</div><!--/buckets-->

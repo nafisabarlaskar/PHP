@@ -1,0 +1,139 @@
+<!-- TinyMCE -->
+<script type="text/javascript" src="/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		mode : "specific_textareas",
+        editor_deselector : "intro_video",
+		theme : "simple"
+	});
+</script>
+
+<!-- /TinyMCE -->
+
+<br/>
+<div id="buckets">
+	<div class="grid2col">
+		<div><h2>Faculty Registration</h2>
+			<br/>
+			<p>
+		
+	<form enctype="multipart/form-data"  method="post" action="/admin/add-faculty">
+	<div class="row">
+		<div class="label">First Name</div>
+		<div>
+			<input type="text" name="first_name" id="first_name"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Last Name</div>
+		<div style="float:left">
+			<input type="text" name="last_name" id="last_name"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Email</div>
+		<div style="float:left">
+			<input type="text" name="email" id="email"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Password</div>
+		<div style="float:left">
+			<input type="password" name="password" id="password"/>			
+		</div>
+	</div>
+	<!-- 
+	<div class="row">
+		<div class="label">Address Line 1</div>
+		<div style="float:left">
+			<input type="text" name="address_line_1" id="address_line_1" value="<?php //echo $this->form->getValue('address_line_1');?>" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Address Line 2</div>
+		<div style="float:left">
+			<input type="text" name="address_line_2" id="address_line_2" value="<?php //echo $this->form->getValue('address_line_2');?>" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">City</div>
+		<div style="float:left">
+			<input type="text" name="city" id="city" value="<?php //echo $this->form->getValue('city');?>" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">State</div>
+		<div style="float:left">
+			<input type="text" name="state" id="state" value="<?php //echo $this->form->getValue('state');?>" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Pin Code</div>
+		<div style="float:left">
+			<input type="text" name="zip" id="zip" value="<?php //echo $this->form->getValue('zip');?>" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Country</div>
+		<div style="float:left">
+			<input type="text" name="country" id="country" value="<?php //echo $this->form->getValue('country');?>" />
+		</div>
+	</div>
+	 -->
+	<div class="row">
+		<div class="label">Phone</div>
+		<div style="float:left">
+			<input type="text" name="phone" id="phone"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">HighLights</div>
+		<div style="float:left">
+			<textarea name="highlights" rows="10" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Detailed Bio</div>
+		<div style="float:left">
+			<textarea name="bio" rows="15" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Introduction Video</div>
+		<div style="float:left">
+			<textarea class="intro_video" name="intro_video" rows="3" cols="50"></textarea>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">Add Photo</div>
+		<div style="float:left">
+			<input type="file" name="photo" id="photo"/>			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="label">
+			<input type="submit" value=" Add Faculty "/>
+		</div>
+	</div>
+	
+	
+	
+</form>
+			</p>
+		</div>				
+	</div>			
+</div><!--/buckets-->
+

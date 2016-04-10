@@ -1,0 +1,33 @@
+<?php $this->headTitle('Upload Courses'); ?>
+<br/>
+	<div id="page_content">
+		<div id="content">
+		<div class="box">
+			<div class="box_content">
+			<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+			<br/>
+			<br/>
+			<table style="font-size:25px;width:595px;"><tr><td style="width:400px">Courses</td>
+			</tr></table>
+			<br/>
+			
+			<?php 
+					foreach($this->courses as $course)
+					{
+			?>
+			
+			<table style="border:2px solid gray;width:595px;color:gray;cell-padding:15px;table-layout:fixed;">
+			<tr>
+			<td>
+					<a href="/admin/display-batches/
+					course_id/<?php echo $course->course_id?>/"><?php echo $course->title;?></a>
+					</td>
+			</tr>
+	</table>
+	<?php 
+			}
+	?>			
+
+</div></div></div></div>
+
+<!--/buckets-->

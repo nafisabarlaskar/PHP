@@ -1,0 +1,247 @@
+
+<?php $this->headTitle($this->course->title); ?>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" src="/js/start-quiz.js?v=14"></script>
+<div class="banner">
+<div class="banner_in">
+	<div class="banner_full">
+		<h1><span itemprop="name"><?php echo $this->topic->topic_name;?></span></h1>						
+	</div>	
+</div>
+</div>
+<?php 
+$image_name = str_replace(" ","",strtolower($this->topic->title));
+$image_name = str_replace("-","",$image_name);
+$big_image_name = 'quizbig_'.str_replace(",","",$image_name).'.jpg';
+$small_image_name = 'quizsmall_'.str_replace(",","",$image_name).'.png';
+?>
+
+<div id="page_content">
+	<div id="course_sidebar">
+		<div class="box">
+			<div class="box_content">				
+				<?php include("course-menu.phtml"); ?>			
+			</div>
+		</div>
+	
+	</div>
+	
+	
+	
+	
+
+
+	<div id="course_content" style="min-height:450px;">
+		<div id="content_video">
+			<div class="box"  style="padding-top:60px;min-height:220px;text-align:center;">
+			
+			<?php if($this->is_quiz_completed=='Y') { 
+				if($this->course->has_batch!='Y') {
+			?>
+			
+				<a class="orange_button" href="/course/play-video/topic_id/<?php echo $this->topic->topic_id;?>?iframe=true&width=86%&height=544" rel="prettyPhoto" title="<?php echo $this->topic->topic_name;?>">
+	 				Watch Video 
+		 		</a>	 		
+		 		<br/><br/><br/>	 		
+		 	<?php }?>
+		 		<a id="start_quiz" class="orange_button" href="">							
+					Review Quiz 														
+				</a>
+			<?php } else { 
+				if($this->course->has_batch!='Y') {	
+			?>
+				<a class="orange_button" href="/course/play-video/topic_id/<?php echo $this->topic->topic_id;?>?iframe=true&width=86%&height=544" rel="prettyPhoto" title="<?php echo $this->topic->topic_name;?>">
+	 			Step 1 - Watch Video 
+		 		</a>	 		
+		 		<br/><br/><br/>	 		
+		 	<?php }?>
+		 		<a id="start_quiz" class="orange_button" href="">							
+					Step 2 - Take Quiz 														
+				</a> <br/> <?php if($this->topic->is_sample=='N') echo '* <span style="font-size:12px;color:#07c">( Quiz cannot be retaken )</span>';?>
+			<?php } ?>	
+				
+			<!-- 
+			<iframe width="600" height="400" src="http://www.youtube.com/embed/JQDgE_eJGTM" frameborder="0" allowfullscreen></iframe>
+			 -->
+			 <!-- 
+			 <a href="/course/play-video/topic_id/<?php echo $this->topic->topic_id;?>?iframe=true&width=86%&height=544" rel="prettyPhoto" title="<?php echo $this->topic->topic_name;?>">
+			 	<img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course/<?php echo $big_image_name;?>" width="550" height="400"/> 
+			 </a>
+			  -->
+			</div>
+		</div>
+		<br/>
+		
+		<div id="content_quiz">
+		<form id="quizForm">
+		<div class="box"  style="min-height:450px;">
+		<div class="box_content">
+			<div id="question_div" class="question">
+			<?php 
+			echo ($this->question['question']); 
+			?>
+			
+			<?php //echo $this->question['question_id'];?>
+			</div>
+			
+			<div class="answer_list" id="answer_list">
+			<?php foreach ($this->answers as $key => $value) { ?>
+			<br/><div> 				
+			<?php 	if($this->question['is_completed']=='Y' || $value['user_answer_id']!=null) { ?>
+						<input disabled="disabled" type="radio" name="answer" id="answer_id_<?php echo $value['answer_id'];?>" value="<?php echo $value['answer_id'];?>" /> <?php echo $value['answer'];?>
+			<?php 	} else { ?>
+						<input type="radio" name="answer" id="answer_id_<?php echo $value['answer_id'];?>" value="<?php echo $value['answer_id'];?>" /> <?php echo $value['answer'];?>
+			<?php 	}?>
+			<?php 	if($value['user_answer_id']==$value['answer_id']) {  
+						if($value['is_correct']=='Y') {	?>				
+							&nbsp; - <span style="color:#CC0000">Correct</span>
+			<?php 		}	else if($value['is_correct']=='N') {	?>				
+							&nbsp; - <span style="color:#CC0000">Incorrect</span>
+			<?php 		}				
+					}	?>
+					</div>
+			<?php 
+				} 
+			?>
+			
+			</div><!--  end answer_list -->
+			<div id="question_id_div">
+			<!--  hack for back button press on view score page -->
+				<input type="hidden" name="first_question_id" id="first_question_id" value="<?php echo $this->question['question_id'];?>"/>
+				<input type="hidden" name="first_next_question_id" id="first_next_question_id" value="<?php echo $this->next_question;?>"/>
+				
+				<input type="hidden" name="question_id" id="question_id" value="<?php echo $this->question['question_id'];?>"/>
+				<input type="hidden" name="next_question_id" id="next_question_id" value="<?php echo $this->next_question;?>"/>
+			</div>
+			
+			<br/>
+			<?php if($this->question['is_completed']=='Y' && $this->next_question==null) { ?>
+			<div id="button_div">
+				<input type="submit" class="correct_answer" id="submit_quiz" value="View your Score">
+			</div>			
+			<?php } else if($this->question['is_completed']=='Y') { ?>
+			<div id="button_div">
+				<input type="submit" class="submit_answer" id="next_question" value="Next Question">
+			</div>			
+			<?php } else { ?>
+			<div id="button_div">
+				<input type="submit" class="submit_answer" id="submit_answer" value="Submit Answer">
+			</div>
+			<?php } ?>
+			
+			
+			<div id="answer_explain_div">
+			
+			<?php foreach ($this->answers as $key => $value) { 				
+					if($value['user_answer_id']!=null && $value['user_answer_id']==$value['answer_id']) { ?>
+						<div class='explain_div' id='explain_div_<?php echo $value['answer_id'];?>'>
+						<span class="incorrect_answer"><?php echo $value['answer'];?></span>&nbsp; - 
+						<?php if ($value['is_correct']=='N' ) {?><span class="incorrect">Incorrect</span><?php }?>
+						<?php if ($value['is_correct']=='Y' ) {?><span class="incorrect" style="font-weight:bold;color:green">Correct</span><?php }?>
+						<br/>
+						<span class="answer_explain"><?php echo $value['answer_explain'];?></span>
+						</div>
+			<?php 	}				
+			 	  }
+			?>			
+			
+			</div>
+			</div>		<!-- end div box-content -->
+			</div><!-- end div box -->
+			<input type="hidden" name="topic_id" id="topic_id" value="<?php echo $this->topic->topic_id;?>"/>
+		</form>	
+		</div>
+		<br/>
+		<div style="line-height:25px">
+		<b>Troubleshooting</b><br/>
+		
+		<span style="font-size:12px">On clicking Watch Video</span><br/>
+		<ul style="margin-left:20px">
+		<li><span style="font-size:12px">If you see a white screen - please download latest flash version here - <a href="http://get.adobe.com/flashplayer/" target="_blank">http://get.adobe.com/flashplayer/</a></span></li>
+		<li><span style="font-size:12px">If you are accessing the video from college/office and your video does not load - please check with your system administrator.</span></li>
+		</ul>
+		
+		</div>
+	</div><!-- end form body -->
+
+<!--  
+	<div id="sidebar">
+		<br/>
+		<?php if(Zend_Auth::getInstance()->hasIdentity()) { ?>
+		
+		<div id="sidebar_ask_button">
+			<div class="box">
+			<a href="" id="ask-question-link" class="red_button ask-button">Ask a Question</a>
+			<div id="thankyou_submit" style="height:130px;display:none"></div>
+			<div id="ask_question" style="display:none">
+				<textarea style="padding:5px;" id="question" rows="5" cols="43"></textarea>
+				<br/>
+				<?php if (count($this->faculty)!=1) { ?>				
+					Select Faculty : <select name="faculty_id" id="faculty_id">				
+						<?php foreach ($this->faculty as $faculty): ?>
+							<option value="<?php echo $faculty->user_id; ?>"><?php echo $faculty->first_name.' '.$faculty->last_name; ?></option>
+						<?php endforeach;?>
+					</select>				
+				<?php } 
+				else {
+				?>
+					<input type="hidden" id="faculty_id" name="faculty_id" value="<?php echo $this->faculty[0]->user_id;?>"/>
+				<?php } ?>
+				<input type="hidden" name="course_id" id="course_id" value="<?php echo $this->topic->course_id;?>"/>
+				<div style="text-align:right;padding:5px;">
+					<a href="" class="red_button button-submit" id="ask-button-submit">Submit</a>
+				</div>
+				
+			</div>
+			</div>
+			<br/><br/>
+		</div>
+		
+		<?php }?>
+		
+		<div class="box">
+			<?php if($this->isStudentEnrolled=='Y') { ?>				
+				<a class="blue_button" href="/course/my-view/course_id/<?php echo $this->topic->course_id;?>">Back to Course Home</a>
+			<?php } else { ?>
+				<a class="blue_button" href="/course-details/<?php echo $this->topic->course_id;?>">Back to Course Home</a>
+			<?php } ?>
+		</div>
+		<br/><br/>
+		<div id="start_quiz_div" class="box">
+			<?php if($this->is_quiz_completed=='Y') { ?>			
+				<a id="start_quiz" class="yellow_button" href="">View the Quiz	</a>
+			<?php } else { ?>
+				<a id="start_quiz" class="yellow_button" href="">Start the Quiz	</a>
+			<?php } ?>
+		</div>
+		
+		
+		
+		<div id="sidebar_video" style="display:none;margin-top:10px">
+			<div class="box">
+				<div class="box_content">
+					<div class="question">Stuck - Watch video</div>
+					<div style="text-align:center">
+					<a href="/course/play-video/topic_id/<?php echo $this->topic->topic_id;?>?iframe=true&width=900&height=530" rel="prettyPhoto" title="<?php echo $this->topic->topic_name;?>">
+			 			<img src="<?php echo $this->filesUrl()->imageUrl();?>/images/course/<?php echo $small_image_name;?>" width="200" height="100"/> 
+			 		</a>
+			 		</div>
+				</div> 
+			</div>
+		</div>
+		
+		
+		
+	
+		
+	</div>  -->
+
+</div><!-- end quiz body -->
+
+
+
+<link rel="stylesheet" href="/css/prettyPhoto.css?v=1" type="text/css" media="screen" charset="utf-8" />
+<script src="/js/jquery.prettyPhoto2.js" type="text/javascript" charset="utf-8"></script>
+
+

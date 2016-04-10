@@ -1,0 +1,76 @@
+<?php
+/*
+    # --- ENCRYPTION ---
+
+    # the key should be random binary, use scrypt, bcrypt or PBKDF2 to
+    # convert a string into a key
+    # key is specified using hexadecimal
+    $key = pack('H*', "bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
+    
+    # show key size use either 16, 24 or 32 byte keys for AES-128, 192
+    # and 256 respectively
+    $key_size =  strlen($key);
+    echo "Key size: " . $key_size . "\n";
+    
+    $plaintext = "This string was AES-256 / CBC / ZeroBytePadding encrypted.";
+
+    # create a random IV to use with CBC encoding
+    $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+    $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+    
+    # creates a cipher text compatible with AES (Rijndael block size = 128)
+    # to keep the text confidential 
+    # only suitable for encoded input that never ends with value 00h
+    # (because of default zero padding)
+    $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key,
+                                 $plaintext, MCRYPT_MODE_CBC, $iv);
+
+    # prepend the IV for it to be available for decryption
+    $ciphertext = $iv . $ciphertext;
+    
+    # encode the resulting cipher text so it can be represented by a string
+    $ciphertext_base64 = base64_encode($ciphertext);
+
+    echo  $ciphertext_base64 . "\n";
+
+    # === WARNING ===
+
+    # Resulting cipher text has no integrity or authenticity added
+    # and is not protected against padding oracle attacks.
+    
+    # --- DECRYPTION ---
+    
+    $ciphertext_dec = base64_decode($ciphertext_base64);
+    
+    # retrieves the IV, iv_size should be created using mcrypt_get_iv_size()
+    $iv_dec = substr($ciphertext_dec, 0, $iv_size);
+    
+    # retrieves the cipher text (everything except the $iv_size in the front)
+    $ciphertext_dec = substr($ciphertext_dec, $iv_size);
+
+    # may remove 00h valued characters from end of plain text
+    $plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
+                                    $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec);
+    
+    echo  $plaintext_dec . "\n";
+   */
+
+	 
+?>
+
+
+ 
+<iframe src="http://manipal.dezyre.com/manipal/course?ccode=N-DZ-IB-1402&rollnum=123213&communityid=123456&sectioncode=FEB2013GCCRAA12&loginname=omairaasim@dezyre.com&csum=79c365666388df7fbfa0e4577bf565e7a882a936" 
+style="overflow:hidden;height:100%;width:100%;"></iframe>
+
+ <!--
+ 
+ http://manipal.dezyre.com/manipal/course?ccode=N-DZ-IB-1402&rollnum=123213&communityid=123456&sectioncode=FEB2013GCCRAA12&loginname=omairaasim@dezyre.com&csum=79c365666388df7fbfa0e4577bf565e7a882a936
+ 
+<iframe src="http://manipal.dezyre-labs.com/manipal/course?ccode=N-DZ-IB-1402&rollnum=omairaasim@dezyre.com&communityid=123456&sectioncode=FEB2013GCCRAA12&csum=4fd3db4edaf28e03cd110d6581d2c10c4bbc0473" 
+frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+ 
+  
+<iframe src="http://manipal.dezyre.com/manipal/course?ccode=JKL&rollnum=omair@dezyre.com&communityid=123456&sectioncode=FEB2013GCCRAA12&csum=282c2571f384c48e83cd4331e2076c41eb7e343d" 
+frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+ -->

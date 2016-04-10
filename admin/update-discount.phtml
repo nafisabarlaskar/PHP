@@ -1,0 +1,48 @@
+<?php $this->headTitle('Update Discount Code'); ?>
+<div id="page_content">
+	<div id="content">
+		<div class="box">
+			<div class="box_content">
+
+<div>
+<br/>
+<a href="/admin/index/" style="font-size:15px;">Admin Menu</a>
+	<br/>
+	<br/>
+<form method="post" action="/admin/update-discount">
+<p style="font-size:30;color:orange;">Enter the User id: 
+<div style="text-align: left">
+	<input type="number" name="user_id" placeholder="User id" 
+value="<?php echo $this->user_id ?>" /></p></div><br/>
+<p style="font-size:30;color:orange;">Enter the Course id:
+	<div style="text-align: left">
+	<input type="number" name="course_id" placeholder="Course id" 
+value="<?php echo $this->course_id?>" /></p><br/></div>
+<p style="font-size:30;color:orange;">Enter the Discount code: 
+	<div style="text-align: left">
+	<input type="text" name="discount_code" placeholder="Discount code" 
+value="<?php echo $this->discount_code?>" /></p><br/></div>
+<p style="font-size:30;color:orange;">Enter the Discount Percentage: 
+	<div style="text-align: left">
+	<input type="text" name="discount_percentage" placeholder="Discount percentage" 
+value="<?php echo $this->discount_percentage ?>"/></p><br/></div>
+<p style="font-size:30;color:orange;">Enter Is_Active: 
+<div style="text-align: left">
+	<input type="text" name="is_active" placeholder="is active" 
+value="<?php echo $this->is_active ?>"/><br/></div></p></br>
+<p style="font-size:30;color:orange;">Enter One time: 
+<div style="text-align: left">
+	<input type="text" name="one_time" placeholder="One time" 
+value="<?php echo $this->one_time ?>"/></p><br/>
+
+	
+<input type="hidden" name="discount_id" value="<?php echo $this->discount_id;?>"/>
+<input type="hidden" name="course_id" value="<?php echo $this->course_id;?>"/>
+<input type="hidden" name="title" value="<?php echo $this->title;?>"/>
+<p><input type="submit" value="submit"></p>
+</div>
+</form>
+<?php 
+	echo $this->message;
+?>
+</div></div></div></div></div>

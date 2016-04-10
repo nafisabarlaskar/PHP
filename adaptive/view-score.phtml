@@ -1,0 +1,138 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	var rewatch = $("#rewatch").val();
+	if(rewatch=="N") {
+	 	_veroq.push(['track', 'watches_video', {current_chapter_name: '<?php echo $this->topic->topic_name;?>', current_chapter_id: <?php echo $this->topic->topic_id;?>, next_chapter_name: '<?php echo $this->next_chapter['topic_name'];?>',next_chapter_id: <?php echo $this->next_chapter['topic_id'];?>, course_title: '<?php echo $this->course->title;?>', course_id: '<?php echo $this->course->course_id;?>', next_quiz_complete: '<?php echo $this->next_quiz_complete;?>', org_id: '<?php echo $this->org_id;?>'}]);
+	}
+});
+</script>
+
+<?php 
+/*
+ * _veroq.push(['track', 'manipal', {current_chapter_name: '<?php echo $this->topic->topic_name;?>', current_chapter_id: <?php echo $this->topic->topic_id;?>, next_chapter_name: '<?php echo $this->next_chapter['topic_name'];?>',next_chapter_id: <?php echo $this->next_chapter['topic_id'];?>, course_title: '<?php echo $this->course->title;?>', course_id: '<?php echo $this->course->course_id;?>', next_quiz_complete: '<?php echo $this->next_quiz_complete;?>', from_name: 'Leslie', from_email: 'leslie@dezyre.com'}]);
+echo '<br/>course_title='.$this->course->title;
+echo '<br/>current topic='.$this->topic->topic_name;
+echo '<br/>current_topic_id='.$this->topic->topic_id;
+echo '<br/>next_chapter='.$this->next_chapter['topic_name'];
+echo '<br/>next_chapter_id='.$this->next_chapter['topic_id'];
+echo '<br/>next quiz complete='.$this->next_quiz_complete;
+*/
+?>
+
+<input type="hidden" id="rewatch" name="rewatch" value="<?php echo $this->rewatch;?>"/>
+<script type="text/javascript" src="/js/start-quiz.js?v=13"></script>
+<div class="banner">
+<div class="banner_in">
+	<div class="banner_full"><h1><span itemprop="name"><?php echo $this->topic->topic_name;?> - </span>
+		<?php if($this->is_user_enrolled=='N') { ?>
+		Quiz Score <?php echo (round($this->score/$this->total_score *100))?>%
+		<?php } else { ?> 
+		Quiz Score <?php echo $this->score?>%		
+		<?php }?>						
+	</h1>
+	</div>	
+</div>
+</div>
+
+<div id="page_content">
+	
+	<div id="course_sidebar">
+	<div class="box">
+		<div class="box_content">
+			
+	<!-- 
+	<?php
+	 
+	if($this->is_user_enrolled=='N') {
+		if($this->sample_topic !=null) {?>			
+			<a href="/adaptive/start-quiz/topic_id/<?php echo $this->sample_topic['topic_id'];?>"><span style="color:red;font-weight:bold;font-size:16px">Try another Sample</span></a>
+			<br/><br/>			
+		<?php } ?>				
+	<?php } ?>
+	 -->
+	<?php include("course-menu.phtml"); ?>
+	
+	
+		</div>
+		</div>
+	</div><!-- end sidebar -->
+
+	<div id="course_content">
+		
+		<div class="box">
+			
+			<div class="box_content">
+			<div style="text-align:center">
+			
+			<?php 
+			if($this->is_user_enrolled=='N') {
+				if($this->sample_topic !=null) {
+			?>
+			<a class="orange_button" style="width:220px;text-shadow: 0px 0px #222;" href="/adaptive/start-quiz/topic_id/<?php echo $this->sample_topic['topic_id'];?>">							
+					Watch Another Sample  														
+			</a>
+			<?php }
+				} else if ($this->next_quiz=='Y') {?>
+				<a class="orange_button" style="text-shadow: 0px 0px #222;" href="/adaptive/start-quiz/topic_id/<?php echo $this->next_chapter['topic_id'];?>">							
+					Start Next Module  														
+				</a>
+			
+		<?php }?>
+		</div>	
+		<?php
+			if($this->is_complete =='N') { ?>
+			<br/>
+				You have not completed the Quiz. <a href="/adaptive/start-quiz/topic_id/<?php echo $this->topic->topic_id?>">Start the Quiz</a>
+				
+			<?php 
+			} else {
+			 
+			foreach ($this->questions as $question) {
+				$answers = $this->answers[$question['question_id']];
+			?>
+			<div style="padding:5px;border-bottom:1px solid #eee">
+			<div style="width:100%;float:left;">
+				<div class="question_summary"><?php echo $question['question'];?></div>
+				
+				<div class="question_points_small blue_button">
+					<?php echo $question['points'];?>/<?php echo count($answers)-1;?>						
+				</div>
+			</div>
+			<div class="answer_list_summary">
+				
+			<?php 
+				
+				
+				//print_r($answers);
+				foreach($answers as $answer) { 
+			?>		
+					<?php echo $answer['answer'];?> 
+					<?php if($answer['user_answer_id']==$answer['answer_id']) { 
+							if($answer['is_correct']=='Y') {	?>				
+							&nbsp; - <span style="color:#CC0000">Correct</span>
+			<?php 		}	else if($answer['is_correct']=='N') {	?>				
+							&nbsp; - <span style="color:#CC0000">Incorrect</span>
+			<?php 		}				
+					}	?>
+					
+					<br/>
+					
+			<?php 
+				}
+			?>
+				
+			</div>
+			</div>
+			<?php 
+			}
+			}
+			?>
+			</div> <!--  end div box_content -->
+			</div> <!--  end div box -->
+	</div> <!-- end div content -->
+	
+</div>
+
+
+<link rel="stylesheet" href="/css/prettyPhoto.css?v=1" type="text/css" media="screen" charset="utf-8" />
+<script src="/js/jquery.prettyPhoto2.js" type="text/javascript" charset="utf-8"></script>

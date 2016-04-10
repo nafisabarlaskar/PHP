@@ -1,0 +1,257 @@
+<?php $this->headTitle($this->course->title.' - '.$this->loggedInAs()->getEmail()); ?>
+
+<link href="/css/jquery-ui.css?v=1" rel="stylesheet" type="text/css"/> 
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+$(document).ready(function(){
+	//hide all other modules except first
+	//alert($('.video_supplement_div').first().attr('id'));
+	var first_module = $('.video_supplement_div').first().attr('id');
+	$('.video_supplement_div').not('#' + first_module).hide();
+	
+	$("a.play_webinar").click(function(a) {
+		//a.preventDefault();
+		var video_id=$(this).data("videoid");
+		
+		//hide all other videos
+		$('.video_div').not('#video' + video_id).hide();
+		
+		//$("#video"+video_id ).height($("#video"+video_id).height());
+		
+		$("#video"+video_id).slideToggle( "slow", function() {
+			return false;    
+  		});
+    	return false;
+	});
+
+	$("a.play_video").click(function(a) {
+		//a.preventDefault();
+		var supplement_id=$(this).data("supplementid");
+		
+		//hide all other videos
+		$('.supplement_div').not('#supplement' + supplement_id).hide();
+		
+		//$("#video"+video_id ).height($("#video"+video_id).height());
+		
+		$("#supplement"+supplement_id).slideToggle( "slow", function() {
+			return false;    
+  		});
+    	return false;
+	});
+
+	$("a.display_module").click(function(a) {
+		//a.preventDefault();
+		var topic_id=$(this).data("topicid");
+
+		
+		//$("#video_supplement_"+topic_id ).height($("#video_supplement_"+topic_id).height());
+		$("#video_supplement_"+topic_id).slideToggle( "slow", function() {
+			
+  			return false;    
+  		});
+    	return false;
+	});
+	
+	$(document).tooltip({
+	    content: function() {
+	        return $(this).attr('title');
+	    }
+	});	
+});
+/* ]]> */
+</script>
+
+<style>
+  .ui-tooltip, .arrow:after {
+    background: white;
+    border: 2px solid #777;
+    width:400px;
+    font-size:11px;
+  }
+  
+  .triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 20px solid grey;
+}
+
+  </style>
+
+
+
+<style type='text/css'>
+    .ui-widget-header {
+        background-image: none !important;
+        background-color: rgb(255,215,99) !important; //Any colour can go here
+    }
+</style>
+<script type="text/javascript" src="/js/my-view.js?v=4"></script>
+	
+<div class="banner">
+<div class="banner_mycourse">
+	
+<div style="margin-left:20px;padding-top:10px;"><h1><span itemprop="name"><?php echo $this->course->title;?></span></h1></div>
+<div style="margin-left:25px;padding-top:20px;">
+<span style="font-size:15px;font-weight:bold">Batch Details</span>
+<br/><br/>
+<?php $batch = reset($this->batch); ?>
+Start Date: <?php echo $batch['start_date'];?>
+<br/>
+Class Days: <?php echo $batch['class_days'];?>
+<br/>
+Class Time: <?php echo $batch['class_time'];?>
+<br/>
+</div>
+
+		
+	
+</div>	
+</div>
+<br/>
+
+<div id="page_content">
+	<div id="course_sidebar">
+		<div class="box">
+			<div class="box_content">				
+				<?php include("course-menu.phtml"); ?>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div id="course_content">
+		<?php
+			$counter=0; 
+			foreach($this->topics as $topic) {
+			$counter++;
+		?>
+		<div class="box" style="margin-bottom:20px">
+			<!-- For Module Names -->
+			<div style="padding:10px;background:whitesmoke;margin-bottom:10px;font-size:17px;">
+							
+				<div>
+					<a class="display_module" data-topicid="<?php echo $topic['topic_id']?>" href="#" style="display:block;width:100%">
+						Module <?php echo $counter;?>: <?php echo $topic['topic_name'];?>
+					</a> 
+				</div>
+				
+			</div>
+			<!-- end Module names -->
+			<div class="video_supplement_div" id="video_supplement_<?php echo $topic['topic_id']?>">
+				<!-- For videos -->
+				<?php
+				$videos = $this->videos[$topic['topic_id']];
+				foreach($videos as $video){ 
+					$video_url = $video['video_url'];
+					if($video_url!=null && strlen($video_url)>0) {
+				?>
+					<div style="color:#07c;font-weight:bold;padding:15px;border-bottom:1px solid #ccc;float:left;width:96%;">
+						<div style="display:block;width:100%;">
+							<div style="float:left;width:70%;padding:5px">				
+								Class Recording
+							</div>
+							<div class="silver_button" style="float:right;width:13%;border:1px solid #ccc;text-align:center;padding:5px;font-weight:normal">
+								<a class="play_webinar" data-videoid="<?php echo $video['video_id']?>" href="#">Play Webinar</a>
+							</div>
+						</div>
+						<div class="video_div" id="video<?php echo $video['video_id']?>" style="display: none;margin-top:40px;padding:10px;text-align:center;width:100%">
+							<?php 	$video_url = $video['video_url'];
+									$video_url = str_replace('880', '565', $video_url);
+									$video_url = str_replace('741', '565', $video_url);
+									$video_url = str_replace('510', '349', $video_url);
+									$video_url = str_replace('505', '349', $video_url);
+									echo $video_url;
+							?>
+						</div>
+					</div>				
+				<?php }
+				}				
+				?>
+				<!-- end video -->
+				<!-- For supplements -->
+				<?php
+				$supplements = $this->supplements[$topic['topic_id']];
+				foreach($supplements as $supplement){ ?>
+				<div style="color:#07c;font-weight:bold;padding:15px;border-bottom:1px solid #ccc;float:left;width:96%;">
+					
+					<div style="display:block;width:100%;">
+						<div style="float:left;width:70%;padding:5px">				
+							<?php echo $supplement['supplement_name'];?>
+						</div>
+						<?php if ($supplement['type']=='video') {?>
+						<div class="silver_button" style="float:right;width:13%;border:1px solid #ccc;text-align:center;padding:5px;font-weight:normal">							
+							<a class="play_video" data-supplementid="<?php echo $supplement['supplement_id'];?>" href="#">Play Video</a>
+						</div>
+						<div class="supplement_div" id="supplement<?php echo $supplement['supplement_id'];?>" style="display: none;margin-top:15px;padding:10px;text-align:center;width:100%;float:left">						
+							<?php 	$video_url = $supplement['filename'];
+									$video_url = str_replace('880', '565', $video_url);
+									$video_url = str_replace('741', '565', $video_url);
+									$video_url = str_replace('510', '349', $video_url);
+									$video_url = str_replace('505', '349', $video_url);
+									echo $video_url;
+							?>
+						</div>
+						<?php } else { ?>
+						<div class="silver_button" style="float:right;width:13%;border:1px solid #ccc;text-align:center;padding:5px;font-weight:normal">
+							<a href="/course/download/filename/<?php echo $supplement['filename'];?>">Download</a>
+						</div>
+						<?php }?>
+					</div>
+					
+					
+					
+				</div>
+				<?php 
+				}				
+				?>
+				<!-- end supplements -->
+				<!-- for quizzes 	-->
+				<?php 
+						if($topic['has_quiz']=='Y' && $topic['quiz_id']!=null) {
+				?>
+				<div style="color:#07c;font-weight:bold;padding:15px;border-bottom:1px solid #ccc;float:left;width:96%;">
+				<?php 	if($topic['is_complete']=='Y') {?>
+						<div style="display:block;width:100%;">
+							<div style="float:left;width:70%;padding:5px">								
+								<a href="/adaptive/start-quiz/topic_id/<?php echo $topic['topic_id']?>">
+									Quiz - <?php echo $topic['topic_name'];?>							
+								</a>	
+							</div>							
+							<div class="silver_button" style="float:right;width:13%;border:1px solid #ccc;text-align:center;padding:5px;font-weight:normal">
+								<a href="/adaptive/view-score/topic_id/<?php echo $topic['topic_id']?>"><?php echo $topic['score'];?>%</a>						
+							</div>
+						</div>
+						<?php } else if($topic['is_complete']=='N' || $topic['is_complete']==null) {?>
+						<div style="display:block;width:100%;">									
+							<div style="float:left;width:70%;padding:5px">
+								<?php echo $topic['topic_name'];?>
+							</div>
+							<div class="silver_button" style="float:right;width:13%;border:1px solid #ccc;text-align:center;padding:5px;font-weight:normal">
+								<a href="/adaptive/start-quiz/topic_id/<?php echo $topic['topic_id']?>">Take Quiz</a>						
+							</div>						
+						</div>
+						<?php 		
+									
+							}
+						?>
+				</div>	
+					<?php }//end has quiz
+						?>
+				<!--  end quizzes -->
+			</div>
+		</div>
+		<?php }?>
+	
+	
+	
+	</div> <!-- end content div -->
+	
+</div> <!-- end pagecontent div -->
+
+
+<link rel="stylesheet" href="/css/prettyPhoto.css?v=1" type="text/css" media="screen" charset="utf-8" />
+<script src="/js/jquery.prettyPhoto2.js" type="text/javascript" charset="utf-8"></script>
